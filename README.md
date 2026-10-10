@@ -1,53 +1,56 @@
-# Aesthetic Font Generator — Node.js Prototype
+# AestheticFonts — React + Vite
 
-Dark neon (purple/violet + cyan) rebuild of the owner's WordPress site
-**aesthetictextgenerator.com**. Prototype scope: working generator tool +
-ported SEO content on a single homepage.
+A free aesthetic font generator: type text once, get it in **269+ Unicode font styles**, click to copy, paste anywhere (Instagram, TikTok, Discord, Free Fire, PUBG…). Includes ⭐ favorites, 🕘 recent copies, live search, category tabs, and a preview-size slider.
 
-## Run it
+## Run locally
 
 ```bash
 npm install
-node server.js        # serves http://localhost:3000 (PORT env overrides)
+npm run dev      # dev server
+npm run build    # production build → dist/
+npm run preview  # preview the dist/ build
 ```
 
-No build step. Dependencies: `express` only.
+## Deploy
 
-## What's inside
+Push this repo to GitHub, then connect it:
 
-- `server.js` — Express static server (+ custom 404 page).
-- `public/index.html` — homepage: hero generator + full SEO content
-  (what-is, unicode explainers, how-to steps, keyboard app, 13 font
-  categories, decorative borders, box/star styles, notes/docs/folders,
-  number fonts, gaming guides, platform guides, A–Z table, bio templates,
-  FAQ accordion, conclusion). One H1, proper heading hierarchy,
-  meta/OG tags, JSON-LD (WebApplication + FAQPage).
-- `public/js/fonts.js` — **the real font engine extracted from the owner's
-  own live site** (`/wp-content/uploads/2026/07/font-generator-v10.html`),
-  **269 styles**. Two bug fixes applied vs the live version:
-  13 border styles had `bd(prefix, suffix, fn)` arg-order swapped (rendered
-  broken on the live site), and the legacy font table mapped both `G` and
-  `H` to the same character (fixed `H` → `ℌ`).
-- `public/js/font-meta.js` — display names + categories for all 269 styles.
-- `public/js/app.js` — live render, click-to-copy (clipboard API + fallback),
-  ⭐ favorites (localStorage), 🕘 recent copies (localStorage), category
-  tabs, search, preview-size slider, A–Z table renderer, FAQ accordion.
-- `public/css/style.css` — dark aesthetic theme, mobile-first.
+### Netlify
+1. Netlify dashboard → **Add new site → Import an existing project** → connect your GitHub repo.
+2. Build settings:
+   - **Build command:** `npm run build`
+   - **Publish directory:** `dist`
+3. Deploy. The included `public/_redirects` (`/* /index.html 200`) makes all client-side routes (e.g. `/instagram-fonts`) work.
 
-## Style counts by category
+### Cloudflare Pages
+1. Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git** → select your repo.
+2. Build settings:
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+3. Deploy. The same `public/_redirects` file enables SPA routing on Cloudflare Pages too.
 
-classic 10 · minimal 10 · cute 11 · gothic 3 · gaming 11 · retro 7 ·
-glitch 2 · emoji 80 · frames 71 · effects 64 (+ special tabs: All, Favorites, Recent)
+## Project layout
 
-## Deliberately left for the full build
-
-- Multi-page migration (individual category/tool pages, URL-for-URL 301 map
-  from the WordPress site, sitemap.xml, robots.txt).
-- Canonical tags + GSC/Search Console wiring.
-- Text decorator (per-word/per-character styling), Lenny-face tool,
-  bio-template builder page.
-- Favorites sync beyond localStorage (accounts), share links.
-- Analytics, ad slots, performance budget / Core Web Vitals tuning.
-- The one broken emoji wrapper in the source data (lone surrogate `\ud83e`
-  at style index ~59) renders as `�` — kept faithful to source; replace with a
-  real emoji in the full build.
+```
+src/
+  main.jsx               # entry
+  App.jsx                # router + layout
+  copy.jsx               # clipboard + toast context
+  styles.css             # light theme (indigo #6366F1 / teal #14B8A6)
+  data/
+    fontEngine.js        # 269 Unicode font styles (ES module)
+    fontMeta.js          # style display names + categories
+    article.js           # SEO article HTML (home page)
+  components/
+    Header.jsx  Footer.jsx  ScrollToTop.jsx  Seo.jsx
+    FontGenerator.jsx    # input, live render, copy, favorites, recents, search, tabs, size slider
+    Faq.jsx              # accordion + FAQ JSON-LD
+    ArticleContent.jsx   # article + copy buttons + A–Z table wiring
+  pages/
+    Home.jsx             # / — generator + article + FAQ
+    ToolPage.jsx         # /cool-fonts /fancy-fonts /instagram-fonts /facebook-fonts
+    StaticPages.jsx      # /about /contact /privacy-policy /terms
+    NotFound.jsx         # 404
+public/
+  _redirects             # SPA fallback for Netlify + Cloudflare Pages
+```
