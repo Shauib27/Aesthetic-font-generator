@@ -72,7 +72,7 @@ export default function FontGenerator() {
   const outs = useMemo(() => list.map((i) => styleOut(i, display)), [list, display]);
 
   const handleCopy = useCallback((i, out) => {
-    copy(out);
+    copy(out, 'Copied!');
     setRecents((r) => [i, ...r.filter((x) => x !== i)].slice(0, 24));
   }, [copy]);
 
@@ -97,11 +97,11 @@ export default function FontGenerator() {
   return (
     <section id="generator" className="tool" aria-label="Aesthetic font generator tool">
       <div className="input-row">
-        <input
+        <textarea
           id="textInput"
-          type="text"
-          maxLength={120}
-          placeholder="Type your text here… e.g. Your Name"
+          rows={3}
+          maxLength={300}
+          placeholder="✎ Type or Paste your text here :)"
           autoComplete="off"
           aria-label="Text to stylize"
           value={text}
@@ -147,22 +147,17 @@ export default function FontGenerator() {
           <div className="empty">{emptyMsg}</div>
         ) : (
           list.map((i, k) => {
-            const meta = FONT_META[i] || {};
             return (
-              <div key={i} className="style-card" onClick={() => handleCopy(i, outs[k])}>
+              <div key={i} className="style-row" onClick={() => handleCopy(i, outs[k])}>
+                <div className="out" style={{ fontSize: size + 'rem' }}>{outs[k]}</div>
                 <button
                   className={'fav-btn' + (favs.includes(i) ? ' on' : '')}
                   title="Add to favorites"
+                  aria-label="Add to favorites"
                   onClick={(e) => toggleFav(e, i)}
                 >
                   ★
                 </button>
-                <div className="out" style={{ fontSize: size + 'rem' }}>{outs[k]}</div>
-                <div className="nm">
-                  <span>{meta.name || 'Style ' + (i + 1)}</span>
-                  <span className="cat">{CAT_LABEL[meta.cat] || meta.cat || ''}</span>
-                </div>
-                <div className="copy-hint">click to copy</div>
               </div>
             );
           })

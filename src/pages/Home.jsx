@@ -3,9 +3,9 @@ import FontGenerator from '../components/FontGenerator.jsx';
 import ArticleContent from '../components/ArticleContent.jsx';
 import Faq, { FAQ_JSONLD } from '../components/Faq.jsx';
 
-const TITLE = 'Aesthetic Font Generator ✨ Copy & Paste 269+ Fonts Free';
+const TITLE = 'Aesthetic Font #𝟙 ✨ 𝓒𝓸𝓹𝔂 & 𝓟𝓪𝓼𝓽𝓮 💫 250+ Fonts Free';
 const DESC =
-  'Free aesthetic font generator: type your text and instantly copy 269+ stylish Unicode fonts — cursive, gothic, kawaii, vaporwave, glitch, bubble & more. Works on Instagram, TikTok, Discord, Free Fire & everywhere. No app needed.';
+  'Create aesthetic fonts for your bio, username, captions, and posts. Copy and paste fancy text, cute symbols, and stylish fonts instantly for free.';
 
 const WEBAPP_JSONLD = {
   '@context': 'https://schema.org',
@@ -14,8 +14,7 @@ const WEBAPP_JSONLD = {
   applicationCategory: 'UtilitiesApplication',
   operatingSystem: 'Any',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-  description:
-    'Free online tool that converts plain text into 269+ aesthetic Unicode font styles you can copy and paste anywhere.',
+  description: DESC,
 };
 
 export default function Home() {
@@ -23,24 +22,22 @@ export default function Home() {
     <>
       <Seo title={TITLE} description={DESC} jsonLd={[WEBAPP_JSONLD, FAQ_JSONLD]} />
       <div className="hero">
-        <h1>
-          Aesthetic Font Generator ✨<br />
-          Copy &amp; Paste 269+ Fonts Free
-        </h1>
-        <p className="lead">
-          Type your text once — get it back in <strong>269+ aesthetic font styles</strong> instantly.
-          Click any style to copy, then paste it on Instagram, TikTok, Discord, Free Fire, PUBG or
-          anywhere. No app, no sign-up, no cost.
+        <h1>Aesthetic Font ➜ 《𝕮𝖔𝓅𝔂 ⓐⓝⓓ 𝓟𝓪𝓼𝓽𝓮》Generator</h1>
+        <p className="intro">
+          An aesthetic font generator is a free online tool that utilises the Unicode standard to
+          convert plain text into stylised, copy-and-paste fonts. There is no need for an app,
+          installation or account. Every day, millions of users on Instagram, TikTok, Discord, Free
+          Fire, PUBG, and Roblox are styling their bios, usernames, and nicknames with copy-paste
+          aesthetic fonts that make their profiles impossible to scroll past.
+        </p>
+        <p className="intro">
+          Soft cursive script for an Instagram bio, Gothic blackletter for a Free Fire username,
+          kawaii symbols for a TikTok nickname, or coquette-style text for a Pinterest profile, this
+          tool outputs 150+ aesthetic font styles instantly. Type your text, browse.
         </p>
       </div>
 
       <FontGenerator />
-
-      <p className="tip">
-        💡 <strong>Pro tip:</strong> tap the ⭐ on any style to pin it to your{' '}
-        <strong>Favorites</strong> tab. Everything you copy is saved in the <strong>🕘 Recent</strong>{' '}
-        tab — even after you close the page.
-      </p>
 
       <ArticleContent />
       <Faq />
