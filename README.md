@@ -1,94 +1,53 @@
-# Aesthetic Font Generator
+# Aesthetic Font Generator — Node.js Prototype
 
-Built the same way as your Cool Font Maker project (same React + Vite
-architecture, same component structure, same combinatorial Unicode engine),
-retargeted for the "aesthetic / pastel / cute" niche.
+Dark neon (purple/violet + cyan) rebuild of the owner's WordPress site
+**aesthetictextgenerator.com**. Prototype scope: working generator tool +
+ported SEO content on a single homepage.
 
-## What's different from Cool Font Maker
-
-- **Branding**: text logotype "aesthetic fonts" instead of an image logo
-  (no logo.png/favicon files needed — just a generated SVG favicon).
-- **Color palette**: soft pink/lilac (`--primary` / `--secondary` in
-  `src/styles/global.css`) instead of indigo/teal.
-- **Fonts**: Instrument Serif (headings) + Manrope (body), loaded from
-  Google Fonts in `index.html`.
-- **14 new decorative wraps** themed for the niche: Bubble Tea, Butterfly,
-  Ribbon Bow, Soft Dots, Foam Bubbles, Coquette Bow, Star Eyes, Pastel
-  Cloud, Y2K Star, Cottagecore, Soft Petal, Mushroom, Glow Sparkle,
-  Crescent Charm — see `src/data/fontStyles.js`.
-- **Categories reordered** to put Aesthetic / Cute / Cursive first.
-- **New pages**: `/pastel-fonts`, `/cute-fonts`, `/bio-fonts` (instead of
-  `/cool-fonts`, `/fancy-fonts`, `/facebook-fonts`); `/instagram-fonts`
-  kept since it's still relevant.
-- **Full rewrite** of the homepage SEO article, FAQ, and table of contents
-  for the aesthetic-font keyword instead of cool-font.
-- Everything else — the transform engine (`src/utils/fontTransforms.js`),
-  the favorites system, copy-to-clipboard, category filters, load-more
-  pagination, random button — is the same proven code from your existing
-  site.
-
-## Before you deploy — 2 things to update
-
-1. **Domain**: `src/components/SEO.jsx` and
-   `src/pages/PlaceholderPages.jsx` both use a placeholder
-   `https://your-domain.com`. Replace it with your real domain once you
-   pick one (find/replace across both files).
-2. **Logo (optional)**: right now the header/footer show a text
-   logotype ("*aesthetic* fonts"). If you'd rather have an image logo
-   like Cool Font Maker, drop `logo.png` / `footer-logo.png` into
-   `public/` and swap the `<span className="header__logo-mark--text">`
-   block in `Header.jsx` (and the matching one in `Footer.jsx`) back to
-   an `<img>` tag, same pattern as the original project.
-
-## Run locally
+## Run it
 
 ```bash
 npm install
-npm run dev
+node server.js        # serves http://localhost:3000 (PORT env overrides)
 ```
 
-## Build for production
+No build step. Dependencies: `express` only.
 
-```bash
-npm run build
-```
+## What's inside
 
-Creates a `dist/` folder with the finished static site.
+- `server.js` — Express static server (+ custom 404 page).
+- `public/index.html` — homepage: hero generator + full SEO content
+  (what-is, unicode explainers, how-to steps, keyboard app, 13 font
+  categories, decorative borders, box/star styles, notes/docs/folders,
+  number fonts, gaming guides, platform guides, A–Z table, bio templates,
+  FAQ accordion, conclusion). One H1, proper heading hierarchy,
+  meta/OG tags, JSON-LD (WebApplication + FAQPage).
+- `public/js/fonts.js` — **the real font engine extracted from the owner's
+  own live site** (`/wp-content/uploads/2026/07/font-generator-v10.html`),
+  **269 styles**. Two bug fixes applied vs the live version:
+  13 border styles had `bd(prefix, suffix, fn)` arg-order swapped (rendered
+  broken on the live site), and the legacy font table mapped both `G` and
+  `H` to the same character (fixed `H` → `ℌ`).
+- `public/js/font-meta.js` — display names + categories for all 269 styles.
+- `public/js/app.js` — live render, click-to-copy (clipboard API + fallback),
+  ⭐ favorites (localStorage), 🕘 recent copies (localStorage), category
+  tabs, search, preview-size slider, A–Z table renderer, FAQ accordion.
+- `public/css/style.css` — dark aesthetic theme, mobile-first.
 
-## Deploy to Netlify (same as your other projects)
+## Style counts by category
 
-**Option A — drag and drop**
-1. Run `npm run build`
-2. Go to https://app.netlify.com/drop
-3. Drag the `dist/` folder in — it goes live immediately.
+classic 10 · minimal 10 · cute 11 · gothic 3 · gaming 11 · retro 7 ·
+glitch 2 · emoji 80 · frames 71 · effects 64 (+ special tabs: All, Favorites, Recent)
 
-**Option B — connect the repo**
-1. Push this project to GitHub.
-2. In Netlify: "Add new site" → "Import an existing project".
-3. Build command: `npm run build`
-4. Publish directory: `dist`
+## Deliberately left for the full build
 
-## Project structure
-
-```
-src/
-  components/   Header, Footer, SEO, FontGenerator, FontCard, FontFilters,
-                ArticleContent, FAQ, TableOfContents, CopyChip
-  data/
-    fontStyles.js       style/category metadata + combinatorial builder
-  utils/
-    fontTransforms.js   Unicode mapping engine (unchanged from original)
-    favorites.js        localStorage favorites (unchanged pattern)
-  pages/
-    Home.jsx            homepage (generator + SEO article)
-    PlaceholderPages.jsx  category + legal pages
-  styles/
-    global.css          all site styling, color tokens at the top
-```
-
-## Adding more styles or categories
-
-Add entries to `WRAPPERS`, `ALPHABET_META`, `COMBINING_META`, or the
-`SPECIAL_STYLES` / `gamingStyles` / `cuteStyles` / `decorStyles` arrays in
-`src/data/fontStyles.js` — the `buildStyles()` function combines them
-automatically, the same way it already does for the base set.
+- Multi-page migration (individual category/tool pages, URL-for-URL 301 map
+  from the WordPress site, sitemap.xml, robots.txt).
+- Canonical tags + GSC/Search Console wiring.
+- Text decorator (per-word/per-character styling), Lenny-face tool,
+  bio-template builder page.
+- Favorites sync beyond localStorage (accounts), share links.
+- Analytics, ad slots, performance budget / Core Web Vitals tuning.
+- The one broken emoji wrapper in the source data (lone surrogate `\ud83e`
+  at style index ~59) renders as `�` — kept faithful to source; replace with a
+  real emoji in the full build.
