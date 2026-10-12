@@ -34,8 +34,11 @@ The browser hydrates the prerendered HTML (`src/main.jsx`).
 ### Netlify
 Build command `npm run build`, publish directory `dist`. Netlify serves `dist/404.html` for unknown URLs and redirects `/page` → `/page/`. The contact form uses Netlify Forms (`data-netlify="true"`).
 
-### Cloudflare Pages
-Build command `npm run build`, output directory `dist`. Cloudflare Pages serves the top-level `404.html` for unknown URLs. (Netlify Forms won’t work there; swap the contact form endpoint.)
+### Cloudflare Workers (Workers & Pages → Worker with static assets)
+Build command `npm run build`, deploy command `npx wrangler deploy`. `wrangler.jsonc` serves `dist/` as static assets
+(`/page` → `/page/`, unknown URLs → `404.html` with a 404 status). Keep that file: without it Cloudflare's build
+auto-configures the Vite project and the prerender step breaks. (Netlify Forms won’t work there; swap the contact
+form endpoint.)
 
 `public/_headers` sets long-term caching for hashed assets on both hosts.
 

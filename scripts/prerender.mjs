@@ -7,8 +7,23 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
 const ssrDir = path.join(root, 'dist-ssr');
-const entry = fs.readdirSync(ssrDir).find((f) => /^entry-server\.(m?js)$/.test(f));
-const { render, ROUTES, SITE_URL } = await import(pathToFileURL(path.join(ssrDir, entry)).href);
+// The SSR bundle is usually dist-ssr/entry-server.js, but build plugins (e.g. Cloudflare's)
+// can move it to dist-ssr/assets/entry-server-<hash>.js, so search for it.
+function findEntry(dir) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) {
+      const hit = findEntry(p);
+      if (hit) return hit;
+    } else if (/^entry-server(-[\w-]+)?\.m?js$/.test(e.name)) {
+      return p;
+    }
+  }
+  return null;
+}
+const entry = findEntry(ssrDir);
+if (!entry) throw new Error('Prerender: no entry-server bundle found in ' + ssrDir);
+const { render, ROUTES, SITE_URL } = await import(pathToFileURL(entry).href);
 
 const template = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
 const build = (url) => {

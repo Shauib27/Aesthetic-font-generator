@@ -1,0 +1,13 @@
+{
+  // Static-assets-only Worker: serves the prerendered site from dist/.
+  // Having this file stops Cloudflare's build from auto-configuring the Vite project.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "aesthetic-font-generator",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": "./dist",
+    // /about -> /about/ and unknown URLs get dist/404.html with a real 404 status
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
