@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect } from 'react';
 import { SITE_NAME, OG_IMAGE, absUrl } from '../data/site.js';
+import { SETTINGS } from '../config/settings.js';
 
 /* During prerendering a collector object is provided through context and Seo
    writes its data into it; in the browser Seo updates document.head on navigation. */
@@ -27,6 +28,8 @@ export function renderHead(d) {
   if (!d) return '';
   const tags = [
     `<title>${esc(d.title)}</title>`,
+    // Search Console HTML-tag verification: only when a valid code is configured (src/config/settings.js).
+    SETTINGS.gscVerification ? `<meta name="google-site-verification" content="${esc(SETTINGS.gscVerification)}">` : '',
     `<meta name="description" content="${esc(d.description)}">`,
     `<meta name="robots" content="${d.robots}">`,
     d.noindex ? '' : `<link rel="canonical" href="${esc(d.url)}">`,

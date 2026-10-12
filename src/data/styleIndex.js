@@ -80,6 +80,12 @@ export const CATEGORIES = [
   { key: 'minimal', label: 'Minimal', ids: byCat('minimal') },
 ].filter((c) => c.ids.length > 0);
 
+/** Base category label of a style (used for safe analytics metadata). */
+export function styleCategory(i) {
+  const c = CATEGORIES.find((x) => x.key === catOf(i));
+  return c ? c.label : 'Other';
+}
+
 export const CATEGORY_IDS = Object.fromEntries(CATEGORIES.map((c) => [c.key, c.ids]));
 
 /* ---------- Platform recommendations (used by platform landing pages + search aliases) ---------- */

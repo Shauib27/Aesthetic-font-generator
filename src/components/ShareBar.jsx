@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { absUrl } from '../data/site.js';
 import { useCopy } from '../copy.jsx';
 import { IconShare, IconLink } from './Icons.jsx';
+import { track } from '../analytics.js';
 
 /* Lightweight sharing: native share sheet where supported, plain share URLs otherwise.
    No third-party widgets or scripts are loaded. */
@@ -28,6 +29,7 @@ export default function ShareBar({ title = 'Free aesthetic font generator — co
 
   const nativeShare = async () => {
     try {
+      track('share_click', { platform: 'native' });
       await navigator.share({ title, url });
     } catch (e) {
       /* user closed the share sheet */
@@ -38,11 +40,6 @@ export default function ShareBar({ title = 'Free aesthetic font generator — co
     <div className={'share' + (compact ? ' compact' : '')}>
       <span className="share-label">{heading}</span>
       <div className="share-btns">
-        {canNative && (
-          <button type="button" className="share-btn primary" onClick={nativeShare}>
-            <IconShare /> Share
-          </button>
-        )}
         {links.map((l) => (
           <a
             key={l.name}
@@ -51,13 +48,20 @@ export default function ShareBar({ title = 'Free aesthetic font generator — co
             target="_blank"
             rel="noopener noreferrer nofollow"
             aria-label={`Share on ${l.label || l.name} (opens in a new tab)`}
+            onClick={() => track('share_click', { platform: l.name.toLowerCase() })}
           >
             {l.name}
           </a>
         ))}
-        <button type="button" className="share-btn" onClick={() => copy(url, 'Link copied')}>
+        <button type="button" className="share-btn" onClick={() => { copy(url, 'Link copied'); track('share_click', { platform: 'copy_link' }); }}>
           <IconLink /> Copy link
         </button>
+        {/* Added after hydration where supported; placed last so nothing else moves. */}
+        {canNative && (
+          <button type="button" className="share-btn primary" onClick={nativeShare}>
+            <IconShare /> More…
+          </button>
+        )}
       </div>
     </div>
   );

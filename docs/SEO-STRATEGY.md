@@ -1,72 +1,137 @@
-# SEO & content strategy
+# SEO, content & technical audit — Aesthetic Text Generator
 
-Last reviewed: 2026-10-12. Competitors were checked live on that date; re-check before major changes.
+Audit date: 2026-10-13. Competitor pages were reviewed live on 2026-10-12. No ranking-tool data (positions, search volumes) was available, so “targets” below are inferred from titles, H1s and headings, and keyword priorities are judgement calls to validate in Google Search Console once the site has impressions.
 
-## 1. Competitor review (summary)
+---
 
-| Site | Strengths | Weaknesses we verified |
+## 1. Site-level verdict
+
+**Before this round:** a strong tool with one very long homepage article (≈5,500 words, 10 platform H2s) that overlapped the new platform pages. The structure was moving from “single tool” toward “topical resource”, but the homepage was competing with its own child pages.
+
+**Now:** a topical resource. The homepage covers the core intent plus education. 20 category/platform pages, 6 guides and a symbols page each own one intent, and the homepage summarises them in tables that link to them instead of competing.
+
+---
+
+## 2. Topical map
+
+```
+CORE: Aesthetic fonts / aesthetic font generator  (/)
+├── Font categories ........ /cursive-fonts/ /cute-fonts/ /gothic-fonts/ /bold-fonts/ /italic-text/
+│                            /bubble-fonts/ /small-caps-fonts/ /glitch-text/
+├── Font effects ........... /strikethrough-text/ /upside-down-text/
+├── Related generators ..... /fancy-fonts/ /cool-fonts/ /stylish-text/ /symbols/
+├── Platform use cases ..... /instagram-fonts/ /tiktok-fonts/ /discord-fonts/ /whatsapp-fonts/
+│                            /facebook-fonts/ /twitter-fonts/ /gaming-fonts/
+├── How-to guides .......... /guides/how-to-copy-and-paste-fonts/ /guides/aesthetic-bio-ideas/
+├── Unicode education ...... /guides/unicode-fonts-explained/
+└── Compatibility & safety . /guides/why-fonts-show-as-boxes/ /guides/fancy-text-character-limits/
+                             /guides/are-fancy-fonts-safe/
+```
+
+Missing clusters (see roadmap): localized versions (Indonesian / Spanish), more platforms (YouTube, Roblox rules), “name ideas” content, and a dedicated vaporwave/wide-text page once demand is confirmed.
+
+## 3. Semantic map (entities and concepts, where each is explained)
+
+| Concept / entity | Where it is covered |
+|---|---|
+| Unicode, Unicode Consortium, code point (U+1D400) | Home “The Unicode behind aesthetic text”, Unicode guide |
+| Unicode blocks: Mathematical Alphanumeric Symbols, Letterlike Symbols, Enclosed Alphanumerics, IPA/Phonetic Extensions, Fullwidth Forms, Combining Diacritical Marks | Home table, Unicode guide, category pages (cursive, gothic, bubble, small caps, strikethrough) |
+| Glyph vs character, font fallback, “tofu”, Noto fonts | Unicode guide, boxes guide |
+| NFKC compatibility normalization | Unicode guide (“why some apps turn styled text back to normal”) |
+| UTF-16 code units, surrogate pairs, weighted counting (X) | Character-limits guide, X page |
+| Homoglyphs / look-alike characters, impersonation | Safety guide, cool fonts page |
+| Screen readers (accessibility), search/hashtag matching | Home compatibility, safety guide, bold/italic/X pages |
+| Usernames vs display names, bios, captions | All platform pages, home compatibility table |
+| Instagram, TikTok, Discord (markdown), WhatsApp (formatting codes), Facebook (name policy), X, Free Fire, PUBG Mobile, Roblox, Minecraft, Steam, Xbox | Platform pages |
+| Typography terms: blackletter / Fraktur / Old English, script, small caps, superscript/subscript, monospace, double-struck | Category pages |
+| Keyboard apps, iOS “Allow Full Access” privacy | Home, safety guide |
+
+## 4. Page intent map (key pages)
+
+| URL | Primary intent / keyword | Secondary | What Google likely expects | Status |
+|---|---|---|---|---|
+| `/` | aesthetic font generator; aesthetic fonts copy and paste | aesthetic text, fancy text, Unicode fonts | Working tool immediately, many styles, copy buttons, what/how, examples, FAQ | Tool first; content restructured |
+| `/fancy-fonts/` | fancy text generator | fancy fonts | Tool + decorative styles + explanation | OK — distinct from home (decorative focus) |
+| `/cool-fonts/` | cool fonts / cool text | edgy, gaming-style | Tool + examples | OK |
+| `/stylish-text/` | stylish text / stylish name | name formula | Name-building advice | OK |
+| `/cursive-fonts/` | cursive font generator | write in cursive online | Script styles, examples, Instagram use | OK |
+| `/gothic-fonts/` | gothic / old english font | fraktur, blackletter | Fraktur styles, readability | OK |
+| `/bold-fonts/` | bold text generator | bold for Instagram/Facebook | Bold styles, search caveats | OK |
+| `/italic-text/` **new** | italic text generator | italics on Instagram | Italic styles, quirks | Created |
+| `/strikethrough-text/` **new** | strikethrough text generator | underline text, cross out text | Line styles, uses, native alternatives | Created |
+| `/upside-down-text/` **new** | upside down text generator | flip text, backwards text | Flip/reverse styles | Created |
+| `/bubble-fonts/` | bubble letters / bubble font | circled letters | Circled/filled/squared styles | OK |
+| `/small-caps-fonts/` | small caps generator | tiny text, superscript | Small text styles, missing letters | OK |
+| `/glitch-text/` | glitch text / zalgo text | creepy text | Zalgo levels, responsible use | OK |
+| `/instagram-fonts/` … `/gaming-fonts/` | “<platform> fonts” | bio / name / limits | Field-by-field rules, limits, how-to | OK |
+| `/twitter-fonts/` **new** | twitter fonts / X fonts | bold on X | Fields, weighted counting | Created |
+| `/symbols/` | aesthetic symbols copy paste | hearts, stars, dividers, kaomoji | Tap-to-copy symbol grids | OK |
+| Guides | informational (“what are…”, “why boxes”, “how to copy”) | — | Direct answer first, steps, tables | 1 new, 3 expanded |
+
+### Cannibalization found and fixed
+- **Homepage vs platform pages (fixed):** the homepage article had separate H2s for Instagram, TikTok, Discord, WhatsApp, X, Facebook, LinkedIn, Threads/Reddit, YouTube and Snapchat/Pinterest. These are replaced by one “Where aesthetic fonts work” table that links to each platform page.
+- **Homepage vs category pages (fixed):** “Online Font Convert: Types of Text Fonts” and the 13 style-category H3s are replaced by category cards and a “How to choose” table that links to the category pages.
+- **Watch list:** `/fancy-fonts/`, `/cool-fonts/` and `/stylish-text/` are differentiated by picks, examples and copy (decorative / edgy / names). Re-check in Search Console; merge if Google rotates them for the same queries.
+- **Not created on purpose:** `/aesthetic-fonts/` and `/fancy-text-generator/`, which would duplicate `/` and `/fancy-fonts/`.
+
+## 5. Competitor gap matrix
+
+| Competitor | Does well | Appears to target (from title/H1) | Content strengths | UX strengths | Technical strengths | Weaknesses (verified) | Our opportunity |
+|---|---|---|---|---|---|---|---|
+| aestheticsfont.com | Long, sectioned homepage | aesthetic font copy and paste | Platform sections, bio templates, Unicode explanation | Explicit Copy buttons | — | Emoji-stuffed title/H1; no search, favorites or filters; only IG/FB pages; “Load more” | Clean intent-matched H1s, search, favorites, dedicated platform pages |
+| fontb.com | Category hubs, multi-language, related tools | font generator, copy & paste fonts | Many category sections, 10-Q FAQ, Unicode blocks | Category chips | Clean title | No style search; generic H1 | Search + aliases, compatibility hints, deeper guides |
+| fontgen.cool | Tabs, favorites, recent, preview size | font generator, cool/fancy text | Use-case sections | Favorites pinned on top | — | Copy only by clicking text; no TikTok/Discord pages | Explicit Copy/Copied!, platform pages |
+| aestheticfont.com | Many per-style pages | aesthetic font, numbers, A–Z | Style variety | Saved list | — | Thin pages, no FAQ/Unicode explanation, external tool links | Fewer, deeper pages with unique explanations |
+| cute-fonts.com | Share buttons, recent | cute fonts | Story intro | Share bar | — | 2-question FAQ, decorative H1, no favorites/search | Rich FAQs, accessible share bar with native share |
+
+**Implemented from the gaps:** style search with aliases; explicit Copy buttons; compatibility hints; platform pages with field tables; Unicode, compatibility, character-limit and safety guides; native + link-based sharing; direct-answer blocks on every page; prerendered HTML.
+
+## 6. Content roadmap
+
+### HIGH priority
+| Page / topic | Intent | Primary keyword | Secondary topics | URL | Internal links | Why |
+|---|---|---|---|---|---|---|
+| Name ideas generator content (no new styles) | Commercial / inspirational | aesthetic name ideas | cute names, gamer names | `/guides/aesthetic-name-ideas/` | home, stylish-text, gaming, cute | Large long-tail demand; uses existing engine |
+| Vaporwave / wide text | Tool | vaporwave text generator | fullwidth, aesthetic text | `/vaporwave-text/` | home, cool, retro | Real styles exist (Fullwidth, Y2K); clear intent — **validate volume first** |
+| Search Console review | — | — | — | — | — | After 4–8 weeks: check queries per page, merge or retarget overlapping pages |
+
+### MEDIUM priority
+| Page / topic | Intent | Primary keyword | URL | Why |
+|---|---|---|---|---|
+| YouTube channel name fonts | Platform | youtube fonts | `/youtube-fonts/` | Unique field rules; moderate demand |
+| Roblox display names (rules-focused) | Informational | roblox fancy name | `/guides/roblox-display-names/` | Users try and fail; strong answer opportunity |
+| Indonesian version of the homepage | Localized tool | tulisan aesthetic | `/id/` + hreflang | Existing interest (term is in the FAQ) |
+| Emoji vs Unicode text guide | Informational | emoji vs fancy text | `/guides/…` | Supports AEO for comparison queries |
+
+### LOW priority
+| Page / topic | URL | Why |
 |---|---|---|
-| **aestheticsfont.com** | Long homepage (≈2–2.5k words), platform sections (Discord, WhatsApp, X, LinkedIn), Unicode explanation, bio templates, explicit Copy buttons | Emoji-stuffed H1/title; no search, favorites or category filters (“Load more” only); only Instagram + Facebook have their own pages; no share buttons |
-| **fontb.com** | Clean title (“Font Generator — Copy & Paste 300+ Font Styles”), many category hubs (bold, cursive, cute, cursed…), platform sections, Unicode-block explanation, 10-question FAQ, other tools, ES/DE versions | No style search on the generator; generic H1 (“Font Generator”); no share buttons |
-| **fontgen.cool** | Category tabs, favorites, recent, preview size | Copy = click the card (no explicit button); no search; no TikTok/Discord coverage; no platform pages; no share buttons |
-| **aestheticfont.com** | Many thin per-style pages (cute, bold, round…), saved list, regenerate | No real FAQ, no Unicode/compatibility explanation, copy by (double-)click only, links out to unrelated tools |
-| **cute-fonts.com** | Share buttons (FB, X, email, WhatsApp, Telegram), recent list | Thin 2-question FAQ, decorative H1, no favorites/search, no platform pages |
+| Per-style pages (e.g. “Bold Script”) | — | Most would be thin; only create where a style has its own search demand |
+| Spanish / French versions | `/es/`, `/fr/` | Only after the Indonesian test |
 
-## 2. Gap map — COMPETITOR → GAP → OUR SOLUTION
+## 7. Indexation strategy
 
-| Competitor | Gap | Our solution |
-|---|---|---|
-| All five | No search across styles | Instant search over name, category and aliases (“old english” → gothic, “instagram” → recommended set) |
-| fontgen.cool, aestheticfont.com, cute-fonts.com | Copy works only by clicking the text; users must guess | Every card has a labelled **Copy** button that changes to **Copied!**, plus tap-to-copy on the text and a toast |
-| All five | No honest per-style compatibility signal | Each style is checked once at load; styles with combining marks or rare characters get a small hint (“May not work in usernames”, “Check on older devices”) |
-| aestheticsfont.com, cute-fonts.com, aestheticfont.com | Decorative, emoji-heavy H1s | Plain, intent-matching H1 on every page (“Aesthetic Font Generator — Copy & Paste Aesthetic Fonts”) |
-| aestheticsfont.com, fontgen.cool, cute-fonts.com, aestheticfont.com | Platform advice lives inside one long page | Six dedicated platform pages with field-by-field tables (which fields accept fancy text, character limits, change limits) |
-| All five | Usernames vs display names rarely explained | Every platform page states that @usernames only accept basic characters and where styled text *does* work |
-| fontgen.cool, aestheticfont.com, cute-fonts.com | Little or no Unicode/compatibility education | Guides: Unicode fonts explained (with block table), why fonts show as boxes (support by Unicode version), are fancy fonts safe (privacy, accessibility) |
-| aestheticsfont.com (keyboard-app section) | Unverified claims (e.g. an “official” keyboard app) | Honest keyboard-app advice with the iOS “Full Access” privacy warning |
-| aestheticsfont.com, fontb.com, fontgen.cool, aestheticfont.com | No share buttons | Lightweight share bar: native share sheet where supported, plain links for Facebook, X, WhatsApp, Telegram, Reddit, Copy link — no third-party scripts |
-| All five (observed client-side tools) | AI/answer engines get little structured, direct-answer text | Each page opens with a one-paragraph direct answer, then tables, numbered steps and an FAQ that matches FAQPage JSON-LD |
-| aestheticfont.com, cute-fonts.com | Many thin “style” pages | Fewer, deeper pages: each category page has unique explanation (e.g. why ℭℌℑℜℨ look different), tables, examples, FAQ |
+| Index | Noindex / exclude |
+|---|---|
+| `/`, all category, effect and platform pages, `/symbols/`, `/guides/` + guides, `/about/`, `/contact/`, `/privacy-policy/`, `/terms/` | `/admin/settings/` (noindex meta + `X-Robots-Tag`, not in sitemap), `404.html` (noindex, no canonical). The site creates no search-result or parameter URLs: the generator’s search and tabs are client state, not URLs. |
 
-What this site already did better before the update: favorites + recent + category tabs + preview size together, 269 styles, an A–Z alphabet section, bio templates, number fonts, Indonesian/French sections.
+## 8. Scores
 
-## 3. Page plan (implemented)
+| Area | Original site | After round 1 | Now | Notes |
+|---|---|---|---|---|
+| Content | 4 | 7 | 8 | Accurate, example-led; homepage rewritten |
+| Search intent | 4 | 7 | 8.5 | One intent per page; cannibalization removed |
+| Semantic SEO | 3 | 6.5 | 8 | Unicode/compat concepts now explained where useful |
+| Topical authority | 2 | 6.5 | 7.5 | Needs time, links and a few more clusters |
+| Technical SEO | 2 | 8.5 | 9 | Prerendered HTML, canonicals, sitemap lastmod, noindex utility routes |
+| Internal linking | 3 | 7.5 | 8.5 | Every content page has ≥3 contextual inlinks (About, Contact and legal pages rely on header/footer links) |
+| UX | 5 | 8 | 8.5 | Clearer header, faster to the tool |
+| Mobile | 5 | 8 | 8.5 | No overflow 320–768px |
+| AEO / AI Overviews | 3 | 7 | 8.5 | Direct answers, tables, steps, matching FAQ schema |
+| E-E-A-T / trust | 3 | 6 | 7 | Editorial standards, honest disclaimers; no named authors (none were invented) |
+| Performance | 6 | 7.5 | 7.5 | ~148 KB gzip JS; route-level splitting recommended |
+| **Overall** | **3.6** | **7.2** | **8.1** | Remaining gains come mostly from real-world signals (links, Search Console data) |
 
-| Tier | URL | Primary intent |
-|---|---|---|
-| 1 | `/` | aesthetic font / aesthetic font generator / aesthetic fonts copy and paste / aesthetic text |
-| 1 | `/fancy-fonts/` | fancy text generator, fancy fonts |
-| 1 | `/stylish-text/` | stylish text, stylish name |
-| 1 | `/cool-fonts/` | cool fonts, cool text |
-| 2 | `/cursive-fonts/` `/cute-fonts/` `/gothic-fonts/` `/bold-fonts/` `/bubble-fonts/` `/small-caps-fonts/` `/glitch-text/` | category generators |
-| 3 | `/instagram-fonts/` `/tiktok-fonts/` `/discord-fonts/` `/whatsapp-fonts/` `/facebook-fonts/` `/gaming-fonts/` | platform-specific use |
-| 3 | `/symbols/` | aesthetic symbols copy and paste |
-| 4 | `/guides/…` (5 guides + index) | informational, long-tail, AEO |
+## 9. Analytics & verification
 
-Deliberately **not** created: `/aesthetic-fonts/` and `/fancy-text-generator/` (would cannibalise `/` and `/fancy-fonts/`), and one-page-per-style doorway pages.
-
-## 4. Internal linking model
-
-- **Home →** all category pages (cards with live previews), all platform pages, all guides, symbols.
-- **Category/platform pages →** 5 related pages (cards), 2 relevant guides, home via breadcrumb + header/footer.
-- **Guides →** generator CTA, contextual links to category/platform pages, 3 related pages, 3 more guides.
-- **Homepage article →** contextual links from its sections to the matching category/platform pages and guides.
-- **Header** (Font styles / Social media / Guides menus) and **footer** (Font generators, Popular fonts, Social media fonts, Guides, Company & legal).
-- Anchor text is descriptive and varied (“cursive font generator”, “Instagram fonts”, “why fonts show as boxes”).
-
-## 5. Technical SEO
-
-- Every route is prerendered at build time (`scripts/prerender.mjs`) with its own title, description, canonical, robots, Open Graph, Twitter card and JSON-LD; the client hydrates the same markup.
-- Trailing-slash URLs are canonical; `sitemap.xml` and `robots.txt` are generated from `src/routes.js`.
-- `404.html` is prerendered with `noindex` and no canonical; there is no SPA catch-all, so unknown URLs return a real 404.
-- Schema: `WebSite` + `WebApplication` + `FAQPage` (home), `BreadcrumbList` + `FAQPage` (landing pages), `Article` + `BreadcrumbList` (+ `FAQPage` where a visible FAQ exists) on guides. FAQ JSON-LD is generated from the same strings that are rendered.
-- Set the production domain with `VITE_SITE_URL` (default `https://aesthetictextgenerator.com`).
-
-## 6. Remaining opportunities
-
-1. Verify the domain in Google Search Console and submit `/sitemap.xml`.
-2. Add real analytics (privacy-friendly) to learn which styles and pages are used, then reorder “Popular”.
-3. Consider additional pages only with real demand data: `/x-twitter-fonts/`, `/youtube-fonts/`, `/roblox-names/` (rules-focused), a Spanish or Indonesian version with `hreflang`.
-4. The homepage article is long (≈8k words including examples); consider moving the platform and language sections to their dedicated pages once those pages rank.
-5. Earn links: the guides (Unicode blocks table, compatibility by Unicode version) are the most linkable assets.
-6. Re-check platform limits every few months; they change.
+Single source of truth: `src/config/settings.js` (reads `src/config/site-settings.json`, overridable by build env vars). See README → “Analytics & verification”.

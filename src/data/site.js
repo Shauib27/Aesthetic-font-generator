@@ -2,7 +2,7 @@
 export const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://aesthetictextgenerator.com').replace(/\/+$/, '');
 export const SITE_NAME = 'Aesthetic Text Generator';
 export const OG_IMAGE = '/og-image.png';
-export const LAST_UPDATED = '2026-10-12';
+export const LAST_UPDATED = '2026-10-13';
 
 /** Absolute canonical URL for a route path ('/' or '/x/'). */
 export function absUrl(path = '/') {
@@ -20,6 +20,11 @@ export const NAV = {
     { to: '/small-caps-fonts/', label: 'Small Caps' },
     { to: '/glitch-text/', label: 'Glitch Text' },
   ],
+  effects: [
+    { to: '/italic-text/', label: 'Italic Text' },
+    { to: '/strikethrough-text/', label: 'Strikethrough Text' },
+    { to: '/upside-down-text/', label: 'Upside Down Text' },
+  ],
   generators: [
     { to: '/', label: 'Aesthetic Font Generator' },
     { to: '/fancy-fonts/', label: 'Fancy Text Generator' },
@@ -33,6 +38,7 @@ export const NAV = {
     { to: '/discord-fonts/', label: 'Discord Fonts' },
     { to: '/whatsapp-fonts/', label: 'WhatsApp Fonts' },
     { to: '/facebook-fonts/', label: 'Facebook Fonts' },
+    { to: '/twitter-fonts/', label: 'X (Twitter) Fonts' },
     { to: '/gaming-fonts/', label: 'Gaming Fonts' },
   ],
   guides: [
@@ -41,6 +47,7 @@ export const NAV = {
     { to: '/guides/why-fonts-show-as-boxes/', label: 'Why fonts show as boxes' },
     { to: '/guides/are-fancy-fonts-safe/', label: 'Are fancy fonts safe?' },
     { to: '/guides/aesthetic-bio-ideas/', label: 'Aesthetic bio ideas' },
+    { to: '/guides/fancy-text-character-limits/', label: 'Fancy text character limits' },
   ],
   company: [
     { to: '/about/', label: 'About' },

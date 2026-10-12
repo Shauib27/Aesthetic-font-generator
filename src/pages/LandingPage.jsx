@@ -7,6 +7,9 @@ import { Breadcrumbs, StyleShowcase, LinkCards, UnicodeNote } from '../component
 import { LANDING_BY_PATH } from '../content/landings.jsx';
 import { GUIDE_BY_PATH } from '../content/guides.jsx';
 import { linkInfo } from '../content/linkInfo.js';
+import { LAST_UPDATED } from '../data/site.js';
+
+const formatDate = (d) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 
 export default function LandingPage({ path }) {
   const p = LANDING_BY_PATH[path];
@@ -56,6 +59,7 @@ export default function LandingPage({ path }) {
           </ol>
           <h3>Compatibility</h3>
           <p>{p.compat}</p>
+          <p className="small">Last reviewed <time dateTime={p.updated || LAST_UPDATED}>{formatDate(p.updated || LAST_UPDATED)}</time>.</p>
         </section>
 
         <Faq items={p.faq} />

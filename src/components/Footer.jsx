@@ -1,15 +1,17 @@
 import { Link } from 'react-router-dom';
 import { NAV } from '../data/site.js';
+import { ANALYTICS_ENABLED, SETTINGS } from '../config/settings.js';
 
 const COLS = [
   { title: 'Font generators', items: NAV.generators },
-  { title: 'Popular fonts', items: NAV.fonts },
+  { title: 'Popular fonts', items: [...NAV.fonts, ...NAV.effects] },
   { title: 'Social media fonts', items: NAV.social },
   { title: 'Guides', items: [...NAV.guides, { to: '/guides/', label: 'All guides' }] },
   { title: 'Company', items: [...NAV.company, ...NAV.legal] },
 ];
 
 export default function Footer() {
+  const showChoices = ANALYTICS_ENABLED && SETTINGS.requireConsent;
   return (
     <footer className="site-footer">
       <div className="wrap">
@@ -31,6 +33,13 @@ export default function Footer() {
                 {c.items.map((it) => (
                   <li key={it.to}><Link to={it.to}>{it.label}</Link></li>
                 ))}
+                {c.title === 'Company' && showChoices && (
+                  <li>
+                    <button type="button" className="foot-link" onClick={() => window.dispatchEvent(new Event('ag:privacy-choices'))}>
+                      Privacy choices
+                    </button>
+                  </li>
+                )}
               </ul>
             </nav>
           ))}

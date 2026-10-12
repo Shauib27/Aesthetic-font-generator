@@ -10,6 +10,8 @@ import GuidesIndex from './pages/GuidesIndex.jsx';
 import Symbols from './pages/Symbols.jsx';
 import { About, Contact, Privacy, Terms } from './pages/StaticPages.jsx';
 import NotFound from './pages/NotFound.jsx';
+import AdminSettings from './pages/AdminSettings.jsx';
+import ConsentBanner from './components/ConsentBanner.jsx';
 import { LANDINGS } from './content/landings.jsx';
 import { GUIDES } from './content/guides.jsx';
 
@@ -36,10 +38,12 @@ export default function App() {
           <Route path="/contact/" element={<Contact />} />
           <Route path="/privacy-policy/" element={<Privacy />} />
           <Route path="/terms/" element={<Terms />} />
+          <Route path="/admin/settings/" element={<AdminSettings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
+      <ConsentBanner />
     </CopyProvider>
   );
 }

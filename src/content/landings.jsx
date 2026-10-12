@@ -160,7 +160,7 @@ export const LANDINGS = [
               <tr><td>Bold gothic</td><td>𝕹𝖎𝖌𝖍𝖙</td><td>Mathematical bold Fraktur letters</td></tr>
               <tr><td>Asian blocks</td><td>几乇丂ㄒ</td><td>CJK and Bopomofo characters that resemble Latin letters</td></tr>
               <tr><td>Upside down</td><td>ʇɥƃᴉu</td><td>IPA letters that look flipped, in reverse order</td></tr>
-              <tr><td>Filled bubble</td><td>🅝🅘🅖🅗🅣</td><td>Enclosed alphanumeric supplement</td></tr>
+              <tr><td><Link to="/bubble-fonts/">Filled bubble</Link></td><td>🅝🅘🅖🅗🅣</td><td>Enclosed alphanumeric supplement</td></tr>
               <tr><td>Glitch</td><td>N̤̍ḭ̑g̗̍</td><td>Stacked combining marks (zalgo)</td></tr>
             </tbody>
           </table>
@@ -172,7 +172,7 @@ export const LANDINGS = [
           <ul>
             <li>Gaming names look sharp in gothic with a frame — more ideas on the <Link to="/gaming-fonts/">gaming fonts</Link> page.</li>
             <li>Keep glitch text for posts and comments; it often fails in name fields. See the <Link to="/glitch-text/">glitch text generator</Link>.</li>
-            <li>Upside-down text reverses the order, so it reads correctly when someone turns the phone around.</li>
+            <li><Link to="/upside-down-text/">Upside-down text</Link> reverses the order, so it reads correctly when someone turns the phone around.</li>
           </ul>
         ),
       },
@@ -271,7 +271,7 @@ export const LANDINGS = [
             <tbody>
               <tr><td>Soft frame</td><td>₊˚♡˚₊ 𝓂𝒾𝒶 ₊˚♡˚₊</td><td>Dreamy, gentle</td></tr>
               <tr><td>Kaomoji</td><td>(っ◔◡◔)っ ♥ mia ♥</td><td>Playful, friendly</td></tr>
-              <tr><td>Bubble letters</td><td>ⓜⓘⓐ</td><td>Bouncy, childlike</td></tr>
+              <tr><td><Link to="/bubble-fonts/">Bubble letters</Link></td><td>ⓜⓘⓐ</td><td>Bouncy, childlike</td></tr>
               <tr><td>Emoji frame</td><td>🎀 𝓂𝒾𝒶 🎀</td><td>Coquette, girly</td></tr>
               <tr><td>Heart separators</td><td>m ♡ i ♡ a</td><td>Sweet, romantic</td></tr>
             </tbody>
@@ -390,6 +390,7 @@ export const LANDINGS = [
             <li><strong>Search:</strong> 𝗕𝗼𝗹𝗱 words are different characters, so hashtags and in-app search won’t match them. Never bold a hashtag or keyword you want found.</li>
             <li><strong>Accessibility:</strong> some screen readers spell out each bold letter. Bold one heading, not the whole post.</li>
             <li><strong>Apps with real formatting:</strong> WhatsApp and Discord support *bold* or **bold** natively — see <Link to="/whatsapp-fonts/">WhatsApp fonts</Link> and <Link to="/discord-fonts/">Discord fonts</Link>.</li>
+            <li>For lighter emphasis, try the <Link to="/italic-text/">italic text generator</Link>.</li>
           </ul>
         ),
       },
@@ -493,6 +494,7 @@ export const LANDINGS = [
             <li>Footnote-style notes in captions: ᵗʰᵃⁿᵏ ʸᵒᵘ</li>
             <li>Discord display names that look clean in the member list — see <Link to="/discord-fonts/">Discord fonts</Link></li>
             <li>Chemistry or maths in plain-text chats: H₂O, x²</li>
+            <li>Playful flipped text — see the <Link to="/upside-down-text/">upside down text generator</Link></li>
           </ul>
         ),
       },
@@ -535,7 +537,7 @@ export const LANDINGS = [
             <tbody>
               <tr><td>Light (Zalgo)</td><td>2</td><td>Spooky captions that stay readable</td></tr>
               <tr><td>Heavy (Zalgo Heavy)</td><td>6</td><td>Horror posts, memes, one-word effects</td></tr>
-              <tr><td>Line effects</td><td>1 repeated</td><td>Strike-through, slashes, sparkle effects</td></tr>
+              <tr><td>Line effects</td><td>1 repeated</td><td><Link to="/strikethrough-text/">Strike-through and slashes</Link>, sparkle effects</td></tr>
             </tbody>
           </table>
         ),
@@ -665,7 +667,7 @@ export const LANDINGS = [
         h2: 'What looks good on TikTok',
         body: (
           <ul>
-            <li><strong>Names:</strong> bold script, bubble letters (🅙🅐🅓🅔) and fullwidth vaporwave text are the most visible on small video overlays.</li>
+            <li><strong>Names:</strong> bold script, <Link to="/bubble-fonts/">bubble letters</Link> (🅙🅐🅓🅔) and fullwidth vaporwave text are the most visible on small video overlays.</li>
             <li><strong>Bios:</strong> 80 characters disappears fast. Style 1–2 words and use symbols such as ✦ or ☾ as separators.</li>
             <li><strong>Video text:</strong> TikTok’s editor has its own fonts; Unicode styles can also be pasted into on-screen text.</li>
           </ul>
@@ -717,7 +719,7 @@ export const LANDINGS = [
                 <tr><td><code># Heading</code></td><td>large heading</td><td>—</td></tr>
               </tbody>
             </table>
-            <p>Markdown doesn’t work in names, channel names or the member list — that’s where Unicode fonts are useful.</p>
+            <p>Markdown doesn’t work in names, channel names or the member list — that’s where Unicode fonts are useful. The alternatives above come from our <Link to="/italic-text/">italic</Link> and <Link to="/strikethrough-text/">strikethrough</Link> generators.</p>
           </>
         ),
       },
@@ -800,6 +802,7 @@ export const LANDINGS = [
             <li><strong>Your name</strong> (25 characters) and <strong>About</strong> (139 characters) don’t support the * _ ~ codes, but they do accept Unicode styles.</li>
             <li><strong>Group names</strong> — a styled group name like 🌸 𝓑𝓮𝓼𝓽𝓲𝓮𝓼 🌸 is easy to spot in a long chat list.</li>
             <li><strong>Greetings</strong> — cursive or framed text for birthdays and holidays, which the built-in codes can’t do.</li>
+            <li><strong>Crossed-out names or About text</strong> — the ~ code only works in messages; use <Link to="/strikethrough-text/">Unicode strikethrough</Link> elsewhere.</li>
           </ul>
         ),
       },
@@ -847,7 +850,7 @@ export const LANDINGS = [
                 <tr><td>Messenger</td><td>Yes</td><td>Pastes like any text</td></tr>
               </tbody>
             </table>
-            <p>Because the profile name follows Facebook’s name policy, use styles in posts and your intro rather than trying to change your name.</p>
+            <p>Because the profile name follows Facebook’s name policy, use styles in posts and your intro rather than trying to change your name. The same approach works on <Link to="/twitter-fonts/">X (Twitter)</Link>.</p>
           </>
         ),
       },
@@ -857,7 +860,7 @@ export const LANDINGS = [
           <ul>
             <li>Use a 𝗯𝗼𝗹𝗱 𝘀𝗮𝗻𝘀 headline, then plain paragraphs.</li>
             <li>Use symbols as bullets (✔ ➜ •) so lists stay scannable — see <Link to="/symbols/">symbols</Link>.</li>
-            <li>Use s̶t̶r̶i̶k̶e̶t̶h̶r̶o̶u̶g̶h̶ for old prices next to a new one.</li>
+            <li>Use <Link to="/strikethrough-text/">s̶t̶r̶i̶k̶e̶t̶h̶r̶o̶u̶g̶h̶</Link> for old prices next to a new one.</li>
             <li>Don’t style the whole post — mobile readers skim, and screen readers struggle with long styled passages.</li>
           </ul>
         ),
@@ -870,7 +873,7 @@ export const LANDINGS = [
       { q: 'Does bold text work in Facebook groups?', a: 'Yes. Unicode bold pastes into group posts and comments. Some groups’ admin tools also offer native formatting for announcements.' },
       { q: 'Will bold text hurt my post’s reach?', a: 'There is no public evidence that it does, but styled words aren’t matched by search. Keep important keywords in plain text.' },
     ],
-    related: ['/bold-fonts/', '/instagram-fonts/', '/whatsapp-fonts/', '/fancy-fonts/', '/'],
+    related: ['/bold-fonts/', '/instagram-fonts/', '/whatsapp-fonts/', '/twitter-fonts/', '/'],
     guides: ['/guides/are-fancy-fonts-safe/', '/guides/how-to-copy-and-paste-fonts/'],
   },
   {
@@ -943,6 +946,234 @@ export const LANDINGS = [
     ],
     related: ['/gothic-fonts/', '/cool-fonts/', '/discord-fonts/', '/stylish-text/', '/symbols/'],
     guides: ['/guides/why-fonts-show-as-boxes/', '/guides/are-fancy-fonts-safe/'],
+  },
+
+  /* ===================== Added: effect & platform pages ===================== */
+  {
+    path: '/italic-text/',
+    kind: 'category',
+    crumb: 'Italic Text',
+    title: 'Italic Text Generator — Copy & Paste Italic Fonts',
+    description: 'Make italic text for Instagram, X, Facebook and LinkedIn where there’s no italic button. Serif, sans-serif and bold italic Unicode styles to copy.',
+    h1: 'Italic Text Generator',
+    lead: 'Add italics to apps that have no formatting button. Pick serif, sans-serif or bold italic and paste it anywhere.',
+    picksLabel: 'Italic',
+    picks: CATEGORY_IDS.italic,
+    sample: 'Italic Text',
+    preview: 'Italic Sans',
+    showcase: { title: 'Italic text examples', sample: 'quietly confident', ids: ids('Italic', 'Italic Sans', 'Bold Italic', 'Bold Italic Sans', 'Classic Italic') },
+    intro: (
+      <>
+        <p className="answer"><strong>How do you type italics where there’s no italic button?</strong> Use Unicode italic letters. Unicode includes complete slanted alphabets — serif 𝐼𝑡𝑎𝑙𝑖𝑐, sans-serif 𝘐𝘵𝘢𝘭𝘪𝘤 and bold versions — so copying italic text from a generator gives you italics in bios, posts and comments that don’t support formatting.</p>
+        <p>Italics are best for emphasis: a book or film title, a quote, or one word you want readers to stress.</p>
+      </>
+    ),
+    sections: [
+      {
+        h2: 'Italic styles compared',
+        body: (
+          <table className="cmp">
+            <thead><tr><th>Style</th><th>Example</th><th>Feels</th></tr></thead>
+            <tbody>
+              <tr><td>Italic (serif)</td><td>𝑞𝑢𝑖𝑒𝑡𝑙𝑦 𝑐𝑜𝑛𝑓𝑖𝑑𝑒𝑛𝑡</td><td>Classic, bookish</td></tr>
+              <tr><td>Italic sans</td><td>𝘲𝘶𝘪𝘦𝘵𝘭𝘺 𝘤𝘰𝘯𝘧𝘪𝘥𝘦𝘯𝘵</td><td>Modern, light</td></tr>
+              <tr><td>Bold italic (serif)</td><td>𝒒𝒖𝒊𝒆𝒕𝒍𝒚 𝒄𝒐𝒏𝒇𝒊𝒅𝒆𝒏𝒕</td><td>Strong emphasis</td></tr>
+              <tr><td>Bold italic sans</td><td>𝙦𝙪𝙞𝙚𝙩𝙡𝙮 𝙘𝙤𝙣𝙛𝙞𝙙𝙚𝙣𝙩</td><td>Sporty, energetic</td></tr>
+            </tbody>
+          </table>
+        ),
+      },
+      {
+        h2: 'Quirks of Unicode italics',
+        body: (
+          <ul>
+            <li><strong>The italic “h” is borrowed.</strong> Serif italic has no h of its own, so Unicode uses ℎ (the Planck constant symbol). It can look slightly different from its neighbours.</li>
+            <li><strong>No italic numbers.</strong> Digits stay upright: “𝑆𝑢𝑚𝑚𝑒𝑟 2026”.</li>
+            <li><strong>Apps with real italics:</strong> WhatsApp (_text_) and Discord (*text*) have native italics that stay searchable — see <Link to="/whatsapp-fonts/">WhatsApp fonts</Link> and <Link to="/discord-fonts/">Discord fonts</Link>.</li>
+            <li>For stronger emphasis, use the <Link to="/bold-fonts/">bold text generator</Link> instead.</li>
+          </ul>
+        ),
+      },
+    ],
+    compat: 'Italic letters are part of the Mathematical Alphanumeric Symbols block (Unicode 3.1, 2001) and display on all current phones and computers. Screen readers may announce them as “mathematical italic” letters.',
+    howTo: ['Type the words you want in italics.', 'Choose a style from the Italic tab.', 'Press Copy.', 'Paste into your post, bio or comment.'],
+    faq: [
+      { q: 'How do I write in italics on Instagram?', a: 'Instagram has no italic option, so copy an italic style from this generator and paste it into your caption, bio or comment.' },
+      { q: 'Why does the letter h look different in italic text?', a: 'Unicode’s serif italic alphabet has no h of its own and uses the Planck constant symbol ℎ instead, which some fonts draw slightly differently.' },
+      { q: 'Can I make italic numbers?', a: 'No. Unicode has no italic digits, so numbers stay upright. Bold styles do include bold digits.' },
+    ],
+    related: ['/bold-fonts/', '/cursive-fonts/', '/twitter-fonts/', '/facebook-fonts/', '/'],
+    guides: ['/guides/unicode-fonts-explained/', '/guides/how-to-copy-and-paste-fonts/'],
+  },
+  {
+    path: '/strikethrough-text/',
+    kind: 'category',
+    crumb: 'Strikethrough Text',
+    title: 'Strikethrough Text Generator — Cross Out & Underline Text',
+    description: 'Cross out text (s̶t̶r̶i̶k̶e̶) or underline it (u̲n̲d̲e̲r̲) in any app. Free strikethrough, slash, double underline and overline text to copy and paste.',
+    h1: 'Strikethrough & Underline Text Generator',
+    lead: 'Cross out, slash, underline or overline any text — even in apps without formatting. Type below and copy.',
+    picksLabel: 'Lines',
+    picks: ids('Strikethrough', 'Slash Through', 'Tilde Strike', 'Cross X Both', 'Underline', 'Double Underline', 'Overline', 'Both Side Lines', 'Wave Below'),
+    sample: 'cross this out',
+    preview: 'Strikethrough',
+    showcase: { title: 'Strikethrough and underline examples', sample: 'old price', ids: ids('Strikethrough', 'Slash Through', 'Tilde Strike', 'Underline', 'Double Underline', 'Overline') },
+    intro: (
+      <>
+        <p className="answer"><strong>How does strikethrough text work?</strong> The generator adds a Unicode “combining” line character after every letter. U+0336 draws a line through the letter (s̶t̶r̶i̶k̶e̶), U+0332 draws one under it (u̲n̲d̲e̲r̲). Because the lines are characters, they stay when you paste the text.</p>
+      </>
+    ),
+    sections: [
+      {
+        h2: 'Line styles and their characters',
+        body: (
+          <table className="cmp">
+            <thead><tr><th>Style</th><th>Example</th><th>Combining character</th></tr></thead>
+            <tbody>
+              <tr><td>Strikethrough</td><td>o̶l̶d̶ ̶p̶r̶i̶c̶e̶</td><td>U+0336 long stroke overlay</td></tr>
+              <tr><td>Slash through</td><td>o̸l̸d̸</td><td>U+0338 long solidus overlay</td></tr>
+              <tr><td>Tilde strike</td><td>o̴l̴d̴</td><td>U+0334 tilde overlay</td></tr>
+              <tr><td>Underline</td><td>o̲l̲d̲</td><td>U+0332 low line</td></tr>
+              <tr><td>Double underline</td><td>o̳l̳d̳</td><td>U+0333 double low line</td></tr>
+              <tr><td>Overline</td><td>o̅l̅d̅</td><td>U+0305 overline</td></tr>
+            </tbody>
+          </table>
+        ),
+      },
+      {
+        h2: 'When to cross out text',
+        body: (
+          <ul>
+            <li><strong>Price drops:</strong> “$̶4̶0̶ now $25” — keep the new price in plain text so it’s readable.</li>
+            <li><strong>Humour and self-correction:</strong> “I l̶o̶v̶e̶ tolerate Mondays.”</li>
+            <li><strong>To-do lists</strong> in apps without checkboxes.</li>
+            <li><strong>Built-in options first:</strong> WhatsApp uses ~text~, Discord ~~text~~, Google Docs Alt+Shift+5 (⌘+Shift+X on Mac). Use Unicode lines where those don’t exist — Instagram, TikTok, X and names.</li>
+          </ul>
+        ),
+      },
+    ],
+    compat: 'Combining marks are supported everywhere, but each font positions them slightly differently, so lines can look broken between letters. Many username fields remove combining marks, and screen readers may skip the word or read each mark.',
+    howTo: ['Type your text.', 'Pick strikethrough, slash, underline or overline from the Lines tab.', 'Press Copy.', 'Paste into your post, caption or message.'],
+    faq: [
+      { q: 'How do I cross out text on Instagram?', a: 'Instagram has no strikethrough button. Copy the strikethrough style from this generator and paste it into your caption, bio or comment.' },
+      { q: 'Why is there a gap in the line between letters?', a: 'The line is drawn separately for each letter by your device’s font. Some fonts leave small gaps, especially around spaces.' },
+      { q: 'Does strikethrough text count as more characters?', a: 'Yes. Each letter gets an extra combining character, so crossed-out text uses about twice the characters of plain text.' },
+    ],
+    related: ['/glitch-text/', '/whatsapp-fonts/', '/italic-text/', '/discord-fonts/', '/'],
+    guides: ['/guides/fancy-text-character-limits/', '/guides/how-to-copy-and-paste-fonts/'],
+  },
+  {
+    path: '/upside-down-text/',
+    kind: 'category',
+    crumb: 'Upside Down Text',
+    title: 'Upside Down Text Generator — Flip & Reverse Text',
+    description: 'Flip text upside down (uʍop ǝpᴉsdn), turn letters over or write backwards. Free upside down text generator — copy and paste anywhere.',
+    h1: 'Upside Down Text Generator',
+    lead: 'Flip your words so they read correctly when the screen is turned around, or write them backwards. Type below and copy.',
+    picksLabel: 'Flip',
+    picks: ids('Upside Down', 'Flip Text', 'Reversed', 'Superscript', 'Small Caps'),
+    sample: 'upside down',
+    preview: 'Upside Down',
+    showcase: { title: 'Upside down examples', sample: 'hello world', ids: ids('Upside Down', 'Flip Text', 'Reversed') },
+    intro: (
+      <>
+        <p className="answer"><strong>How does upside down text work?</strong> Each letter is replaced with a character that looks rotated 180° — a → ɐ, e → ǝ, h → ɥ — and the order of the letters is reversed, so the phrase reads correctly when someone turns their phone upside down.</p>
+        <p>Most rotated letters come from the International Phonetic Alphabet (IPA), which has many “turned” letters for describing speech sounds.</p>
+      </>
+    ),
+    sections: [
+      {
+        h2: 'Three ways to flip text',
+        body: (
+          <table className="cmp">
+            <thead><tr><th>Style</th><th>Example (“hello world”)</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td>Upside down</td><td>plɹoʍ ollǝɥ</td><td>Turns letters and reverses order — reads correctly when rotated</td></tr>
+              <tr><td>Flip text</td><td>ɥǝllo ʍoɹlp</td><td>Turns letters but keeps the order</td></tr>
+              <tr><td>Reversed</td><td>dlrow olleh</td><td>Writes letters backwards without turning them</td></tr>
+            </tbody>
+          </table>
+        ),
+      },
+      {
+        h2: 'Letters that don’t flip perfectly',
+        body: (
+          <>
+            <p>Some letters already look the same upside down (o, s, x, z, l), so they stay unchanged. Numbers aren’t flipped at all. Short words and phrases give the cleanest result.</p>
+            <p>Want readable decoration instead? Try <Link to="/small-caps-fonts/">small caps</Link> or <Link to="/cool-fonts/">cool fonts</Link>.</p>
+          </>
+        ),
+      },
+    ],
+    compat: 'The turned letters are long-established IPA characters, so upside down text displays on virtually every device. Screen readers read it as unusual letters, so keep it for fun posts and messages.',
+    howTo: ['Type a short phrase.', 'Choose Upside down, Flip text or Reversed.', 'Press Copy.', 'Paste it into a message, comment or bio.'],
+    faq: [
+      { q: 'Can I write upside down on Instagram or TikTok?', a: 'Yes. Copy the upside down style and paste it into a comment, caption or bio. It’s ordinary text, so it works on any device.' },
+      { q: 'Why are my numbers not upside down?', a: 'Unicode has no rotated digits that display reliably, so the generator leaves numbers as they are.' },
+      { q: 'What is the difference between upside down and reversed text?', a: 'Upside down text rotates each letter and reverses the order. Reversed text only writes the letters in backwards order without rotating them.' },
+    ],
+    related: ['/cool-fonts/', '/small-caps-fonts/', '/glitch-text/', '/tiktok-fonts/', '/'],
+    guides: ['/guides/unicode-fonts-explained/', '/guides/how-to-copy-and-paste-fonts/'],
+  },
+  {
+    path: '/twitter-fonts/',
+    kind: 'platform',
+    crumb: 'X (Twitter) Fonts',
+    title: 'Twitter Fonts — Fancy Fonts for X Name, Bio & Posts',
+    description: 'Fonts for X (Twitter): style your display name, bio and posts. Learn why styled letters count as 2 characters on X and which fields accept them.',
+    h1: 'X (Twitter) Fonts for Your Name, Bio & Posts',
+    lead: 'Add bold, italic or script text to your X display name, bio and posts. Read the character-count note below before you post.',
+    picksLabel: 'X picks',
+    picks: ids('Bold Sans', 'Bold', 'Italic Sans', 'Bold Italic Sans', 'Bold Script', 'Small Caps', 'Monospace', 'Double-Struck', 'Strikethrough', 'Circled', 'Star Border Bold', 'Fullwidth'),
+    sample: 'Your Name',
+    preview: 'Bold Sans',
+    showcase: { title: 'X post and name examples', sample: 'Thread', ids: ids('Bold Sans', 'Italic Sans', 'Bold Script', 'Small Caps', 'Monospace', 'Strikethrough') },
+    intro: (
+      <>
+        <p className="answer"><strong>Can you use different fonts on X (Twitter)?</strong> Yes. X accepts Unicode text in your display name, bio and posts, so copied bold, italic or script styles keep their look. Your @handle only accepts letters, numbers and underscores.</p>
+      </>
+    ),
+    sections: [
+      {
+        h2: 'X fields and limits',
+        body: (
+          <>
+            <table className="cmp">
+              <thead><tr><th>Field</th><th>Fancy fonts?</th><th>Limit</th></tr></thead>
+              <tbody>
+                <tr><td>@handle</td><td>No</td><td>4–15 letters, numbers, underscores</td></tr>
+                <tr><td>Display name</td><td>Yes</td><td>50 characters</td></tr>
+                <tr><td>Bio</td><td>Yes</td><td>160 characters</td></tr>
+                <tr><td>Post</td><td>Yes</td><td>280 for standard accounts</td></tr>
+              </tbody>
+            </table>
+            <p className="small">Limits as shown on X at the time of writing.</p>
+          </>
+        ),
+      },
+      {
+        h2: 'Why styled posts run out of characters',
+        body: (
+          <>
+            <p>X uses weighted character counting: basic Latin letters count as 1, but most other characters — including styled letters like 𝗕, ᴀ or ⓐ, and emoji — count as 2. A post written entirely in a styled font fits roughly 140 letters instead of 280.</p>
+            <p>That’s why styling one line (a headline or a hook) works better than styling the whole post. More in <Link to="/guides/fancy-text-character-limits/">why fancy text uses more characters</Link>.</p>
+          </>
+        ),
+      },
+      {
+        h2: 'Search, hashtags and accessibility on X',
+        body: <p>Styled words aren’t matched by X search, and styled hashtags don’t become links. Screen readers may spell styled letters out one by one. Keep keywords, hashtags and important information in plain text, and use <Link to="/bold-fonts/">bold</Link> or <Link to="/italic-text/">italic</Link> only for emphasis.</p>,
+      },
+    ],
+    compat: 'Unicode styles display in the X apps and on the web on all current devices. A few rare symbols may show as boxes for people on older systems.',
+    howTo: ['Type your name or headline and copy a style.', 'On X, open Edit profile for your name or bio, or start a new post.', 'Paste the styled text, adding plain text around it.', 'Check the character counter, then save or post.'],
+    faq: [
+      { q: 'How do I bold text on X (Twitter)?', a: 'Standard posts have no bold button, so copy a Unicode bold style from this generator and paste it into your post. Each bold letter counts as two characters.' },
+      { q: 'Can I change my X @handle to a fancy font?', a: 'No. Handles only allow letters, numbers and underscores. Use the fancy version in your display name.' },
+      { q: 'Do fancy fonts hurt my reach on X?', a: 'There’s no public evidence that they do, but styled words and hashtags aren’t matched by search. Keep important keywords plain.' },
+    ],
+    related: ['/bold-fonts/', '/italic-text/', '/instagram-fonts/', '/strikethrough-text/', '/'],
+    guides: ['/guides/fancy-text-character-limits/', '/guides/are-fancy-fonts-safe/'],
   },
 ];
 

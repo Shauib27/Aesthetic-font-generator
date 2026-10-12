@@ -58,6 +58,12 @@ export const GUIDES = [
         </ol>
         <p>On this site, all of that happens in your browser; your text is never sent anywhere. You can try it on the <Link to="/">aesthetic font generator</Link>.</p>
 
+        <h2>Characters, glyphs and fonts</h2>
+        <p>Unicode is maintained by the Unicode Consortium, which publishes new versions of the standard (adding new characters and emoji) roughly once a year. The standard only defines <em>characters</em> — numbers and names. The actual shapes you see, called <em>glyphs</em>, come from the fonts on each device. When a font lacks a character, the system tries another font (“font fallback”); if none has it, you see an empty box. Font families such as Google’s Noto were built to cover as much of Unicode as possible for exactly this reason.</p>
+
+        <h2>Why some apps turn styled text back to normal</h2>
+        <p>Unicode defines “compatibility normalization” (NFKC), which maps look-alike characters back to their basic form — 𝐀 becomes A, ① becomes 1. Some apps and search engines apply it to usernames or search queries, which is why a styled name can be saved as plain text or why search still finds a styled word in some places but not others.</p>
+
         <h2>Limits worth knowing</h2>
         <ul>
           <li><strong>Gaps in alphabets.</strong> Some styles miss letters — there is no small-caps X or superscript q — so generators substitute look-alikes. See <Link to="/small-caps-fonts/">small caps</Link>.</li>
@@ -160,6 +166,9 @@ export const GUIDES = [
         </table>
         <p>In the <Link to="/">generator</Link>, styles that use less common characters are labelled “Check on older devices”.</p>
 
+        <h2>What is font fallback?</h2>
+        <p>No single font contains every Unicode character. When the current font lacks one, the operating system looks for another installed font that has it. Modern iOS, Android, Windows and macOS ship large fallback sets, which is why most styles work. Boxes appear only when no installed font has the character — typically very new emoji or rare scripts on older systems.</p>
+
         <h2>Other reasons text looks wrong</h2>
         <ul>
           <li><strong>The app filters characters.</strong> Usernames and some game name fields replace unsupported characters with “?” or reject them.</li>
@@ -203,7 +212,7 @@ export const GUIDES = [
         <table className="cmp">
           <thead><tr><th></th><th>Browser generator (this site)</th><th>Third-party keyboard app</th></tr></thead>
           <tbody>
-            <tr><td>What it sees</td><td>Only what you type into it</td><td>Potentially everything you type, if given full access</td></tr>
+            <tr><td>What it sees</td><td>Only what you type into it (<Link to="/about/">how it works</Link>)</td><td>Potentially everything you type, if given full access</td></tr>
             <tr><td>Installation</td><td>None</td><td>Required</td></tr>
             <tr><td>Data sent to a server</td><td>None here — conversion runs in your browser</td><td>Depends on the app’s privacy policy</td></tr>
           </tbody>
@@ -218,6 +227,9 @@ export const GUIDES = [
           <li>Keep hashtags plain — styled hashtags don’t work and aren’t readable.</li>
           <li>Prefer native formatting where it exists (WhatsApp *bold*, Discord **bold**).</li>
         </ul>
+
+        <h2>Look-alike characters and impersonation</h2>
+        <p>Characters that look like others are called homoglyphs — for example Cyrillic “а” and Latin “a”. Fancy text relies on them, which is harmless for decoration, but the same trick is used in phishing links and fake accounts. Platforms therefore restrict styled characters in usernames and web addresses. Never use look-alike text to imitate a brand or another person.</p>
 
         <h2>Platform rules</h2>
         <ul>
@@ -284,6 +296,72 @@ export const GUIDES = [
       </>
     ),
     related: ['/instagram-fonts/', '/tiktok-fonts/', '/symbols/'],
+  },
+  {
+    path: '/guides/fancy-text-character-limits/',
+    crumb: 'Fancy text character limits',
+    title: 'Why Fancy Text Uses More Characters (Bio & Name Limits)',
+    description: 'Why styled Unicode letters fill bio and name limits faster on Instagram, TikTok and X, how apps count characters, and how to fit fancy text in.',
+    h1: 'Why Fancy Text Uses More Characters',
+    summary: 'How apps count styled letters, and how to fit fancy text into bio and name limits.',
+    published: '2026-10-13',
+    body: (
+      <>
+        <h2>The short answer</h2>
+        <p className="answer">Many styled letters, such as 𝓐 or 𝐁, are stored as two “code units” in UTF-16, the text format used by most apps, and some apps count those units rather than visible letters. Effects like strikethrough add an extra character after every letter. So a 30-character name field may only fit about 15 styled letters.</p>
+
+        <h2>Three ways apps count characters</h2>
+        <table className="cmp">
+          <thead><tr><th>Counting method</th><th>“𝓜𝓲𝓪” counts as</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Visible characters (code points)</td><td>3</td><td>What you see; friendliest for fancy text</td></tr>
+            <tr><td>UTF-16 code units</td><td>6</td><td>Common in apps built on JavaScript, Java or Swift strings</td></tr>
+            <tr><td>Weighted (X / Twitter)</td><td>6</td><td>Basic Latin counts 1, most other characters count 2</td></tr>
+          </tbody>
+        </table>
+        <p>Which method an app uses isn’t always documented, so the safe assumption is that styled letters may count double.</p>
+
+        <h2>How much space each style uses</h2>
+        <table className="cmp">
+          <thead><tr><th>Style</th><th>Example</th><th>Approx. cost per letter</th></tr></thead>
+          <tbody>
+            <tr><td>Small caps, Greek-style, Asian-style</td><td>ᴍɪᴀ</td><td>1 (BMP characters) — 2 on X</td></tr>
+            <tr><td>Bold, italic, script, gothic, double-struck</td><td>𝓜𝓲𝓪</td><td>2 in UTF-16 counts</td></tr>
+            <tr><td>Strikethrough, underline</td><td>M̶i̶a̶</td><td>2 (letter + combining mark)</td></tr>
+            <tr><td>Glitch / zalgo</td><td>M̤̍ḭ̑</td><td>3–7</td></tr>
+            <tr><td>Frames like ꧁ ꧂</td><td>꧁Mia꧂</td><td>+2 to +20 for the frame</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Common limits</h2>
+        <table className="cmp">
+          <thead><tr><th>Field</th><th>Limit</th><th>Guide</th></tr></thead>
+          <tbody>
+            <tr><td>Instagram name / bio</td><td>30 / 150</td><td><Link to="/instagram-fonts/">Instagram fonts</Link></td></tr>
+            <tr><td>TikTok name / bio</td><td>30 / 80</td><td><Link to="/tiktok-fonts/">TikTok fonts</Link></td></tr>
+            <tr><td>X display name / bio / post</td><td>50 / 160 / 280</td><td><Link to="/twitter-fonts/">X (Twitter) fonts</Link></td></tr>
+            <tr><td>Discord display name / About Me</td><td>32 / 190</td><td><Link to="/discord-fonts/">Discord fonts</Link></td></tr>
+            <tr><td>WhatsApp name / About</td><td>25 / 139</td><td><Link to="/whatsapp-fonts/">WhatsApp fonts</Link></td></tr>
+          </tbody>
+        </table>
+        <p className="small">Limits as shown in each app at the time of writing.</p>
+
+        <h2>How to fit fancy text into a limit</h2>
+        <ol>
+          <li>Style only the most important word — usually your name.</li>
+          <li>Choose a compact style: small caps (ᴍɪᴀ) often costs less than bold script.</li>
+          <li>Use a short frame (✦ name ✦) instead of a long border.</li>
+          <li>Skip strikethrough and glitch effects in name fields.</li>
+          <li>Paste and check the app’s own counter before saving.</li>
+        </ol>
+        <p>The counter under the <Link to="/">generator’s</Link> text box shows the number of characters you typed, before styling.</p>
+      </>
+    ),
+    faq: [
+      { q: 'Why does my fancy name say it is too long?', a: 'The app probably counts each styled letter as two characters. Shorten the name, style fewer letters, or use a compact style such as small caps.' },
+      { q: 'Do emoji count as two characters too?', a: 'Often yes. Most emoji are outside the Basic Multilingual Plane and use two UTF-16 code units; some emoji sequences use even more.' },
+    ],
+    related: ['/twitter-fonts/', '/instagram-fonts/', '/small-caps-fonts/'],
   },
 ];
 

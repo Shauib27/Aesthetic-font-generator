@@ -41,7 +41,7 @@ fs.writeFileSync(path.join(dist, '404.html'), build('/404/'));
 const today = new Date().toISOString().slice(0, 10);
 const sitemap =
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  ROUTES.map((r) => `  <url><loc>${SITE_URL}${r.path}</loc><lastmod>${today}</lastmod><changefreq>${r.changefreq}</changefreq><priority>${r.priority}</priority></url>`).join('\n') +
+  ROUTES.filter((r) => r.sitemap !== false).map((r) => `  <url><loc>${SITE_URL}${r.path}</loc><lastmod>${r.lastmod || today}</lastmod><changefreq>${r.changefreq}</changefreq><priority>${r.priority}</priority></url>`).join('\n') +
   '\n</urlset>\n';
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), sitemap);
 fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);

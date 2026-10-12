@@ -1,8 +1,9 @@
 import { useState, useMemo, useEffect, useCallback, useRef, useDeferredValue, memo } from 'react';
 import {
   CATEGORIES, CATEGORY_IDS, STYLE_COUNT, COMPAT, COMPAT_NOTE,
-  matchesQuery, styleName, styleOut,
+  matchesQuery, styleName, styleOut, styleCategory,
 } from '../data/styleIndex.js';
+import { track, safeSearchTerm } from '../analytics.js';
 import { useCopy } from '../copy.jsx';
 import { IconCopy, IconCheck, IconStar, IconX, IconSearch, IconSpark } from './Icons.jsx';
 
@@ -125,6 +126,16 @@ export default function FontGenerator({ recommended, sample = 'Aesthetic Font', 
     return idx;
   }, [tabs, cat, deferredQuery]);
 
+  const listLen = useRef(0);
+  listLen.current = list.length;
+  // Report searches once typing pauses; unknown terms are sent as "other".
+  useEffect(() => {
+    const q = query.trim();
+    if (!q) return undefined;
+    const t = setTimeout(() => track('font_search', { search_term: safeSearchTerm(q), results_count: listLen.current }), 1200);
+    return () => clearTimeout(t);
+  }, [query]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const shown = useMemo(() => (full ? list : list.slice(0, INITIAL_CARDS)), [full, list]);
   const outs = useMemo(() => shown.map((i) => styleOut(i, display)), [shown, display]);
 
@@ -132,6 +143,8 @@ export default function FontGenerator({ recommended, sample = 'Aesthetic Font', 
     copy(out, 'Copied to clipboard');
     setRecents((r) => [i, ...r.filter((x) => x !== i)].slice(0, 24));
     setCopiedId(i);
+    // Only the style's name/category is reported — never the text itself.
+    track('font_copy', { style_name: styleName(i), category: styleCategory(i) });
     clearTimeout(copiedTimer.current);
     copiedTimer.current = setTimeout(() => setCopiedId(-1), 1500);
   }, [copy]);
@@ -142,6 +155,7 @@ export default function FontGenerator({ recommended, sample = 'Aesthetic Font', 
     const has = favsRef.current.includes(i);
     setFavs((f) => (has ? f.filter((x) => x !== i) : [...f.filter((x) => x !== i), i]));
     show(has ? 'Removed from favorites' : 'Added to favorites');
+    track('font_favorite', { style_name: styleName(i), action: has ? 'remove' : 'add' });
   }, [show]);
 
   const favSet = useMemo(() => new Set(favs), [favs]);
@@ -168,7 +182,7 @@ export default function FontGenerator({ recommended, sample = 'Aesthetic Font', 
         : 'No styles in this category.';
 
   return (
-    <section id="generator" className="gen" aria-label="Font generator">
+    <section id="generator" className="gen" aria-label="Font generator" data-clarity-mask="true">
       <ol className="gen-steps" aria-label="How it works">
         <li><span>1</span>Type your text</li>
         <li><span>2</span>Choose a style</li>
@@ -239,7 +253,7 @@ export default function FontGenerator({ recommended, sample = 'Aesthetic Font', 
             type="button"
             className={'tab' + (cat === t.key && !searching ? ' active' : '') + (t.key === 'picks' ? ' picks' : '')}
             aria-pressed={cat === t.key && !searching}
-            onClick={() => { setCat(t.key); setQuery(''); }}
+            onClick={() => { setCat(t.key); setQuery(''); track('category_select', { category: t.key }); }}
           >
             {t.key === 'favorites' && <IconStar filled={false} />}
             {t.label}

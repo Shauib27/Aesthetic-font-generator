@@ -6,9 +6,17 @@ import { IconMenu, IconX, IconChevron } from './Icons.jsx';
 /* The header is a fixed-height, non-sticky bar, so nothing in the generator can move it.
    The mobile menu and dropdowns are absolutely positioned overlays (no layout shift). */
 const MENUS = [
-  { key: 'fonts', label: 'Font styles', items: [...NAV.fonts, ...NAV.generators.slice(1)] },
-  { key: 'social', label: 'Social media', items: NAV.social },
-  { key: 'guides', label: 'Guides', items: [...NAV.guides, { to: '/guides/', label: 'All guides' }] },
+  {
+    key: 'categories',
+    label: 'Categories',
+    wide: true,
+    groups: [
+      { title: 'Font styles', items: [...NAV.fonts, ...NAV.effects] },
+      { title: 'Generators', items: NAV.generators.slice(1) },
+      { title: 'By platform', items: NAV.social },
+    ],
+  },
+  { key: 'guides', label: 'Guides', groups: [{ items: [...NAV.guides, { to: '/guides/', label: 'All guides' }] }] },
 ];
 
 export default function Header() {
@@ -57,7 +65,7 @@ export default function Header() {
         </button>
 
         <nav id="site-nav" className={'nav-links' + (open ? ' open' : '')} aria-label="Main">
-          <NavLink to="/" end className="nav-a">Generator</NavLink>
+          <NavLink to="/" end className="nav-a">Font Generator</NavLink>
           {MENUS.map((m) => (
             <div key={m.key} className={'dd' + (menu === m.key ? ' open' : '')}>
               <button
@@ -69,15 +77,20 @@ export default function Header() {
               >
                 {m.label} <IconChevron />
               </button>
-              <div className="dd-menu" id={'dd-' + m.key}>
-                {m.items.map((it) => (
-                  <Link key={it.to} to={it.to}>{it.label}</Link>
+              <div className={'dd-menu' + (m.wide ? ' wide' : '')} id={'dd-' + m.key}>
+                {m.groups.map((g, gi) => (
+                  <div className="dd-group" key={gi}>
+                    {g.title && <p className="dd-title">{g.title}</p>}
+                    {g.items.map((it) => (
+                      <Link key={it.to} to={it.to}>{it.label}</Link>
+                    ))}
+                  </div>
                 ))}
               </div>
             </div>
           ))}
-          <NavLink to="/symbols/" className="nav-a">Symbols</NavLink>
           <NavLink to="/about/" className="nav-a">About</NavLink>
+          <NavLink to="/contact/" className="nav-a">Contact</NavLink>
         </nav>
       </div>
     </header>
