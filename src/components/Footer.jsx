@@ -1,29 +1,44 @@
 import { Link } from 'react-router-dom';
+import { NAV } from '../data/site.js';
+
+const COLS = [
+  { title: 'Font generators', items: NAV.generators },
+  { title: 'Popular fonts', items: NAV.fonts },
+  { title: 'Social media fonts', items: NAV.social },
+  { title: 'Guides', items: [...NAV.guides, { to: '/guides/', label: 'All guides' }] },
+  { title: 'Company', items: [...NAV.company, ...NAV.legal] },
+];
 
 export default function Footer() {
   return (
-    <footer className="site">
+    <footer className="site-footer">
       <div className="wrap">
-        <div className="fl">
-          <a href="/#generator">Generator</a>
-          <a href="/#categories">Categories</a>
-          <a href="/#borders">Borders</a>
-          <a href="/#gaming">Gaming</a>
-          <a href="/#faq">FAQ</a>
+        <div className="foot-top">
+          <div className="foot-brand">
+            <Link className="logo" to="/" aria-label="Aesthetic Text Generator — home">
+              <span className="logo-script">Aesthetic Text</span>
+              <span className="logo-sub"><span className="ln" />Generator<span className="ln" /></span>
+            </Link>
+            <p>
+              Free copy-and-paste text styles built from Unicode characters. Everything runs in your
+              browser — nothing you type is sent to a server.
+            </p>
+          </div>
+          {COLS.map((c) => (
+            <nav key={c.title} className="foot-col" aria-label={c.title}>
+              <h2>{c.title}</h2>
+              <ul>
+                {c.items.map((it) => (
+                  <li key={it.to}><Link to={it.to}>{it.label}</Link></li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
-        <div className="fl">
-          <Link to="/cool-fonts">Cool Fonts</Link>
-          <Link to="/fancy-fonts">Fancy Fonts</Link>
-          <Link to="/instagram-fonts">Instagram Fonts</Link>
-          <Link to="/facebook-fonts">Facebook Fonts</Link>
-        </div>
-        <div className="fl">
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/privacy-policy">Privacy Policy</Link>
-          <Link to="/terms">Terms</Link>
-        </div>
-        <p className="fine">© 2026 Aesthetic Font Generator — free aesthetic copy &amp; paste fonts for Instagram, TikTok, Discord &amp; gaming. Made with ✨ and Unicode.</p>
+        <p className="fine">
+          © 2026 Aesthetic Text Generator. These are Unicode text styles, not downloadable font files;
+          how they look depends on the fonts installed on each device.
+        </p>
       </div>
     </footer>
   );

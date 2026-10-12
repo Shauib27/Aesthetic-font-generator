@@ -1,117 +1,225 @@
-import { useState, useMemo, useEffect, useCallback } from 'react';
-import { FONTS } from '../data/fontEngine.js';
-import { FONT_META } from '../data/fontMeta.js';
+import { useState, useMemo, useEffect, useCallback, useRef, useDeferredValue, memo } from 'react';
+import {
+  CATEGORIES, CATEGORY_IDS, STYLE_COUNT, COMPAT, COMPAT_NOTE,
+  matchesQuery, styleName, styleOut,
+} from '../data/styleIndex.js';
 import { useCopy } from '../copy.jsx';
+import { IconCopy, IconCheck, IconStar, IconX, IconSearch, IconSpark } from './Icons.jsx';
 
-const CATS = [
-  ['all', '✨ All'],
-  ['favorites', '⭐ Favorites'],
-  ['recent', '🕘 Recent'],
-  ['classic', '🔤 Classic'],
-  ['cute', '🌸 Cute'],
-  ['gothic', '🖤 Gothic'],
-  ['gaming', '🎮 Gaming'],
-  ['retro', '🌆 Retro'],
-  ['glitch', '👾 Glitch'],
-  ['frames', '🖼️ Frames'],
-  ['emoji', '😎 Emoji'],
-  ['effects', '✨ Effects'],
-  ['minimal', '⌨️ Minimal'],
-];
-const CAT_LABEL = Object.fromEntries(CATS);
+const MAX_LEN = 300;
+const INITIAL_CARDS = 40;
+const EXAMPLES = ['Aesthetic Vibes', 'Luna', 'soft girl era', 'Shadow Hunter', 'Good Vibes Only', 'Daydreamer', 'Midnight Muse', 'GG EZ'];
 
 function load(key, fb) {
   try {
     const v = JSON.parse(localStorage.getItem(key));
-    return Array.isArray(v) ? v : fb;
+    return Array.isArray(v) ? v.filter((x) => Number.isInteger(x) && x >= 0 && x < STYLE_COUNT) : fb;
   } catch (e) {
     return fb;
   }
 }
 
-function styleOut(i, text) {
-  try { return FONTS[i].f(text); } catch (e) { return text; }
+function save(key, value) {
+  try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { /* storage unavailable */ }
 }
 
-export default function FontGenerator() {
+const StyleCard = memo(function StyleCard({ i, out, size, fav, copied, onCopy, onFav }) {
+  const name = styleName(i);
+  const compat = COMPAT[i];
+  return (
+    <article className="style-card">
+      <div className="sc-head">
+        <span className="sc-name">{name}</span>
+        {compat !== 'ok' && (
+          <span className={'sc-chip ' + compat} title={COMPAT_NOTE[compat]}>
+            {compat === 'marks' ? 'May not work in usernames' : 'Check on older devices'}
+          </span>
+        )}
+      </div>
+      <p
+        className="sc-out"
+        style={{ fontSize: size + 'rem' }}
+        onClick={() => onCopy(i, out)}
+        suppressHydrationWarning
+      >
+        {out}
+      </p>
+      <div className="sc-actions">
+        <button
+          type="button"
+          className={'icon-btn fav' + (fav ? ' on' : '')}
+          aria-pressed={fav}
+          aria-label={(fav ? 'Remove ' : 'Add ') + name + (fav ? ' from favorites' : ' to favorites')}
+          title={fav ? 'Remove from favorites' : 'Add to favorites'}
+          onClick={() => onFav(i)}
+        >
+          <IconStar filled={fav} />
+        </button>
+        <button
+          type="button"
+          className={'copy-btn' + (copied ? ' done' : '')}
+          aria-label={copied ? 'Copied' : 'Copy ' + name + ' text'}
+          onClick={() => onCopy(i, out)}
+        >
+          {copied ? <IconCheck /> : <IconCopy />}
+          <span>{copied ? 'Copied!' : 'Copy'}</span>
+        </button>
+      </div>
+    </article>
+  );
+});
+
+/**
+ * @param recommended optional { label, ids } — adds a first "picks" tab used by landing pages
+ * @param sample default preview text when the input is empty
+ */
+export default function FontGenerator({ recommended, sample = 'Aesthetic Font', inputLabel = 'Type your text' }) {
   const { copy, show } = useCopy();
   const [text, setText] = useState('');
   const [query, setQuery] = useState('');
-  const [cat, setCat] = useState('all');
+  const [cat, setCat] = useState(recommended ? 'picks' : 'all');
   const [size, setSize] = useState(1.35);
-  const [favs, setFavs] = useState(() => load('ag_favs', []));
-  const [recents, setRecents] = useState(() => load('ag_recent', []));
-  const [debounced, setDebounced] = useState('');
+  const [favs, setFavs] = useState([]);
+  const [recents, setRecents] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const [copiedId, setCopiedId] = useState(-1);
+  const [full, setFull] = useState(false);
+  const exampleIdx = useRef(0);
+  const copiedTimer = useRef(null);
+  const inputRef = useRef(null);
 
+  // Favorites/recents are read after mount so the prerendered HTML hydrates cleanly.
   useEffect(() => {
-    const t = setTimeout(() => setDebounced(text), 140);
+    setFavs(load('ag_favs', []));
+    setRecents(load('ag_recent', []));
+    setLoaded(true);
+    // The prerendered HTML contains the first INITIAL_CARDS styles; render the rest once hydrated.
+    const t = setTimeout(() => setFull(true), 0);
     return () => clearTimeout(t);
-  }, [text]);
+  }, []);
+  useEffect(() => { if (loaded) save('ag_favs', favs); }, [favs, loaded]);
+  useEffect(() => { if (loaded) save('ag_recent', recents); }, [recents, loaded]);
+  useEffect(() => () => clearTimeout(copiedTimer.current), []);
 
-  useEffect(() => {
-    try { localStorage.setItem('ag_favs', JSON.stringify(favs)); } catch (e) { /* noop */ }
-  }, [favs]);
+  const deferredText = useDeferredValue(text);
+  const deferredQuery = useDeferredValue(query);
+  const display = deferredText.trim() === '' ? sample : deferredText;
 
-  useEffect(() => {
-    try { localStorage.setItem('ag_recent', JSON.stringify(recents)); } catch (e) { /* noop */ }
-  }, [recents]);
-
-  const display = debounced.trim() === '' ? 'Aesthetic Font' : debounced.trim();
+  const tabs = useMemo(() => {
+    const base = [];
+    if (recommended) base.push({ key: 'picks', label: recommended.label, ids: recommended.ids });
+    base.push(CATEGORIES[0]);
+    base.push({ key: 'favorites', label: 'Favorites', ids: favs, count: favs.length });
+    base.push({ key: 'recent', label: 'Recent', ids: recents, count: recents.length });
+    return base.concat(CATEGORIES.slice(1));
+  }, [recommended, favs, recents]);
 
   const list = useMemo(() => {
-    let idx;
-    if (cat === 'all') idx = FONTS.map((_, i) => i);
-    else if (cat === 'favorites') idx = favs.slice();
-    else if (cat === 'recent') idx = recents.slice();
-    else idx = FONTS.map((_, i) => i).filter((i) => FONT_META[i] && FONT_META[i].cat === cat);
-    const q = query.trim().toLowerCase();
-    if (q) idx = idx.filter((i) => FONT_META[i] && FONT_META[i].name.toLowerCase().includes(q));
+    const tab = tabs.find((t) => t.key === cat) || tabs[0];
+    let idx = tab.ids;
+    const q = deferredQuery.trim();
+    if (q) {
+      // A search always looks through every style, so nothing is hidden by the active tab.
+      idx = CATEGORY_IDS.all.filter((i) => matchesQuery(i, q));
+    }
     return idx;
-  }, [cat, query, favs, recents]);
+  }, [tabs, cat, deferredQuery]);
 
-  const outs = useMemo(() => list.map((i) => styleOut(i, display)), [list, display]);
+  const shown = useMemo(() => (full ? list : list.slice(0, INITIAL_CARDS)), [full, list]);
+  const outs = useMemo(() => shown.map((i) => styleOut(i, display)), [shown, display]);
 
   const handleCopy = useCallback((i, out) => {
-    copy(out, 'Copied!');
+    copy(out, 'Copied to clipboard');
     setRecents((r) => [i, ...r.filter((x) => x !== i)].slice(0, 24));
+    setCopiedId(i);
+    clearTimeout(copiedTimer.current);
+    copiedTimer.current = setTimeout(() => setCopiedId(-1), 1500);
   }, [copy]);
 
-  const toggleFav = (e, i) => {
-    e.stopPropagation();
-    if (favs.includes(i)) {
-      setFavs(favs.filter((x) => x !== i));
-      show('Removed from favorites');
-    } else {
-      setFavs([...favs, i]);
-      show('⭐ Added to favorites');
-    }
+  const favsRef = useRef(favs);
+  favsRef.current = favs;
+  const toggleFav = useCallback((i) => {
+    const has = favsRef.current.includes(i);
+    setFavs((f) => (has ? f.filter((x) => x !== i) : [...f.filter((x) => x !== i), i]));
+    show(has ? 'Removed from favorites' : 'Added to favorites');
+  }, [show]);
+
+  const favSet = useMemo(() => new Set(favs), [favs]);
+
+  const tryExample = () => {
+    const ex = EXAMPLES[exampleIdx.current % EXAMPLES.length];
+    exampleIdx.current += 1;
+    setText(ex);
+    inputRef.current && inputRef.current.focus();
   };
 
-  const emptyMsg =
-    cat === 'favorites'
-      ? '⭐ No favorites yet — tap the star on any style to pin it here.'
+  const clearText = () => {
+    setText('');
+    inputRef.current && inputRef.current.focus();
+  };
+
+  const searching = query.trim() !== '';
+  const emptyMsg = searching
+    ? `No styles match “${query.trim()}”. Try “cursive”, “bold”, “gothic” or “bubble”.`
+    : cat === 'favorites'
+      ? 'No favorites yet. Tap the star on any style to keep it here.'
       : cat === 'recent'
-        ? '🕘 Nothing copied yet — click any style and it will appear here.'
-        : 'No styles match your search.';
+        ? 'Nothing copied yet. Styles you copy will appear here.'
+        : 'No styles in this category.';
 
   return (
-    <section id="generator" className="tool" aria-label="Aesthetic font generator tool">
-      <div className="input-row">
-        <textarea
-          id="textInput"
-          rows={3}
-          maxLength={300}
-          placeholder="✎ Type or Paste your text here :)"
-          autoComplete="off"
-          aria-label="Text to stylize"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
+    <section id="generator" className="gen" aria-label="Font generator">
+      <ol className="gen-steps" aria-label="How it works">
+        <li><span>1</span>Type your text</li>
+        <li><span>2</span>Choose a style</li>
+        <li><span>3</span>Copy &amp; paste</li>
+      </ol>
+      <div className="gen-input">
+        <label htmlFor="textInput" className="sr-only">{inputLabel}</label>
+        <div className="field">
+          <textarea
+            id="textInput"
+            ref={inputRef}
+            rows={2}
+            maxLength={MAX_LEN}
+            placeholder="Type or paste your text here…"
+            autoComplete="off"
+            autoCorrect="off"
+            spellCheck={false}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Escape' && text) { e.preventDefault(); setText(''); } }}
+          />
+          {text && (
+            <button type="button" className="field-clear" onClick={clearText} aria-label="Clear text">
+              <IconX />
+            </button>
+          )}
+        </div>
+        <div className="field-foot">
+          <button type="button" className="link-btn" onClick={tryExample}>
+            <IconSpark /> Try an example
+          </button>
+          <span className="counter" aria-live="off">{[...text].length} / {MAX_LEN}</span>
+        </div>
       </div>
-      <div className="tool-meta">
-        <span className="badge">{list.length} styles</span>
-        <label className="slider-wrap">
-          Preview size
+
+      <div className="gen-toolbar">
+        <div className="search">
+          <IconSearch />
+          <label htmlFor="styleSearch" className="sr-only">Search font styles</label>
+          <input
+            id="styleSearch"
+            type="search"
+            placeholder="Search styles: cursive, bubble, gothic…"
+            autoComplete="off"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Escape') setQuery(''); }}
+          />
+        </div>
+        <label className="size-ctl">
+          <span>Size</span>
           <input
             type="range"
             min="0.9"
@@ -121,46 +229,46 @@ export default function FontGenerator() {
             aria-label="Preview text size"
             onChange={(e) => setSize(parseFloat(e.target.value))}
           />
-          <span>{Math.round(size * 20)}px</span>
         </label>
-        <input
-          type="search"
-          placeholder="🔍 Search styles…"
-          aria-label="Search font styles"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
       </div>
-      <div className="tabs" role="tablist" aria-label="Font style categories">
-        {CATS.map(([key, label]) => (
+
+      <div className="tabs" role="group" aria-label="Filter styles by category">
+        {tabs.map((t) => (
           <button
-            key={key}
-            className={'tab' + (cat === key ? ' active' : '')}
-            onClick={() => setCat(key)}
+            key={t.key}
+            type="button"
+            className={'tab' + (cat === t.key && !searching ? ' active' : '') + (t.key === 'picks' ? ' picks' : '')}
+            aria-pressed={cat === t.key && !searching}
+            onClick={() => { setCat(t.key); setQuery(''); }}
           >
-            {label}
+            {t.key === 'favorites' && <IconStar filled={false} />}
+            {t.label}
+            {t.count > 0 && <span className="tab-count">{t.count}</span>}
           </button>
         ))}
       </div>
-      <div id="styles" aria-live="polite">
+
+      <p className="gen-status" role="status">
+        {searching ? `${list.length} styles match “${query.trim()}”` : `${list.length} styles`}
+        <span className="gen-hint"> · Tap a style or its Copy button</span>
+      </p>
+
+      <div className="results">
         {list.length === 0 ? (
           <div className="empty">{emptyMsg}</div>
         ) : (
-          list.map((i, k) => {
-            return (
-              <div key={i} className="style-row" onClick={() => handleCopy(i, outs[k])}>
-                <div className="out" style={{ fontSize: size + 'rem' }}>{outs[k]}</div>
-                <button
-                  className={'fav-btn' + (favs.includes(i) ? ' on' : '')}
-                  title="Add to favorites"
-                  aria-label="Add to favorites"
-                  onClick={(e) => toggleFav(e, i)}
-                >
-                  ★
-                </button>
-              </div>
-            );
-          })
+          shown.map((i, k) => (
+            <StyleCard
+              key={i}
+              i={i}
+              out={outs[k]}
+              size={size}
+              fav={favSet.has(i)}
+              copied={copiedId === i}
+              onCopy={handleCopy}
+              onFav={toggleFav}
+            />
+          ))
         )}
       </div>
     </section>

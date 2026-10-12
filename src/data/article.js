@@ -4,10 +4,10 @@ export const ARTICLE_HTML = `
 <p>An aesthetic font generator is a free online tool that instantly converts your regular text into stylized Unicode characters without any installation. You type a word, and the tool outputs it in dozens of beautiful styles you can copy and paste anywhere text is accepted.</p>
 
 <h2>Aesthetic Fonts vs Regular Fonts What’s the Real Difference?</h2>
-<p>Regular fonts are installed files on your device. They only work where that font is supported. Aesthetic fonts use Unicode characters special symbols that visually resemble styled letters but are built into the global text standard. This means they work on every app, website, and device without needing any fonts installed.</p>
+<p>Regular fonts are installed files on your device. They only work where that font is supported. Aesthetic fonts use Unicode characters special symbols that visually resemble styled letters but are built into the global text standard. This means they work in most apps, websites and devices without installing anything.</p>
 
 <h2>How Unicode Makes Aesthetic Text Work Everywhere</h2>
-<p>Unicode is an international standard with over 149,000 characters, including letters that look bold, italic, cursive, gothic, and more. When you paste aesthetic text, you’re pasting unique Unicode code points. Every modern device already knows how to display them, so your styled text looks the same everywhere.</p>
+<p>Unicode is an international standard with over 149,000 characters, including letters that look bold, italic, cursive, gothic, and more. When you paste aesthetic text, you’re pasting unique Unicode code points. Modern phones and computers include fonts for these characters, so your styled text keeps its look almost everywhere (the exact shapes vary a little from device to device).</p>
 
 <h2>Why These Fonts Are Called Copy and Paste Fonts</h2>
 <p>Because the styling travels with the text. Paste styled text into Instagram, Discord, TikTok, or a WhatsApp message it stays styled. No formatting is lost. That’s why they’re also called copy paste fonts, fancy text, or Unicode fonts.</p>
@@ -37,13 +37,13 @@ export const ARTICLE_HTML = `
 </ul>
 
 <h2>Do We Have a Keyboard App for Aesthetic Font Generator?</h2>
-<p>Yes, beyond the browser tool, dedicated keyboard apps are available for both iPhone and Android users who want aesthetic fonts directly from their keyboard while typing.</p>
+<p>Yes. Besides browser tools like this one, many third-party keyboard apps for iPhone and Android offer fancy fonts while you type. We don’t make a keyboard app, so check reviews and permissions before installing one.</p>
 
 <h3>Aesthetic Font Keyboard App for iPhone (iOS)</h3>
-<p>An official aesthetic font keyboard app is available on the Apple App Store. It lets you generate and type stylish Unicode text directly from your iPhone keyboard without opening the browser. Ideal for quick bio edits and daily messaging.</p>
+<p>Search the App Store for a “fonts keyboard”, install it, then enable it in Settings → General → Keyboard → Keyboards. Be careful with “Allow Full Access”: it lets a keyboard send what you type over the internet, so read the app’s privacy policy first. Read more in <a href="/guides/are-fancy-fonts-safe/">are fancy fonts safe?</a></p>
 
 <h3>Aesthetic Font Keyboard App for Android</h3>
-<p>Android users can find aesthetic font keyboard apps on the Google Play Store. These apps integrate with your default keyboard and offer real-time font switching while you type.</p>
+<p>Search Google Play for a fonts keyboard, enable it in your keyboard settings (the menu name varies by phone), then switch keyboards with the keyboard icon while typing. As on iPhone, only grant extra permissions to apps you trust.</p>
 
 <h3>Browser Tool vs Keyboard App Which Is Better?</h3>
 <table class="cmp">
@@ -56,7 +56,7 @@ export const ARTICLE_HTML = `
 <tr><td>Best for</td><td>Bio building</td><td>Quick daily use</td></tr>
 </tbody>
 </table>
-<p>Verdict: Browser tool wins for variety. Keyboard app wins for speed and convenience.</p>
+<p>Verdict: a browser tool gives you more styles with no installs or permissions; a keyboard app is faster for everyday typing.</p>
 
 <h2>Best Aesthetic Font Style Categories 250+ Vibes Covered</h2>
 <p>Every style below is Unicode-based copy and paste ready, platform compatible, and no installation needed.</p>
@@ -68,7 +68,7 @@ export const ARTICLE_HTML = `
 
 <span class="art-badge">Trending</span>
 <h3>Cute &amp; Kawaii Fonts</h3>
-<p>Soft, rounded, playful styles are popular on TikTok and Instagram. Often combined with heart symbols, sparkles, and flower decorators. Perfect for lifestyle creators and soft-aesthetic profiles.</p>
+<p>Soft, rounded, playful styles are popular on TikTok and Instagram. Often combined with heart symbols, sparkles, and flower decorators. Perfect for lifestyle creators and soft-aesthetic profiles. Try them in the <a href="/cute-fonts/">cute font generator</a>.</p>
 
 <span class="art-badge">Most Searched</span>
 <h3>Coquette Font Styles</h3>
@@ -80,7 +80,7 @@ export const ARTICLE_HTML = `
 
 <span class="art-badge">Bold</span>
 <h3>Gothic &amp; Medieval Styles</h3>
-<p>Dark, dramatic blackletter fonts inspired by medieval manuscripts. Hugely popular in gaming communities, alternative aesthetics, and edgy bios. High visual weight, high impact.</p>
+<p>Dark, dramatic blackletter fonts inspired by medieval manuscripts. Hugely popular in gaming communities, alternative aesthetics, and edgy bios. High visual weight, high impact. See every blackletter style on the <a href="/gothic-fonts/">gothic fonts</a> page.</p>
 
 <span class="art-badge">Retro</span>
 <h3>Vaporwave &amp; Retro Styles</h3>
@@ -89,7 +89,7 @@ export const ARTICLE_HTML = `
 
 <span class="art-badge">Advanced</span>
 <h3>Glitch &amp; Zalgo Effects</h3>
-<p>Corrupted, layered text using stacked Unicode diacritics. Creates an unstable, distorted visual effect. Best for gaming profiles, dark aesthetics, and horror-themed accounts.</p>
+<p>Corrupted, layered text using stacked Unicode diacritics. Creates an unstable, distorted visual effect. Best for gaming profiles, dark aesthetics, and horror-themed accounts. Make your own with the <a href="/glitch-text/">glitch text generator</a>.</p>
 
 <span class="art-badge">Structured</span>
 <h3>Boxed &amp; Framed Text</h3>
@@ -101,11 +101,11 @@ export const ARTICLE_HTML = `
 
 <span class="art-badge">Most Searched</span>
 <h3>Bubble Text &amp; Wide Fonts</h3>
-<p>Bubble letters and full-width text are among the most searched aesthetic styles for TikTok usernames and Instagram bios. High visual impact, immediately recognizable.</p>
+<p>Bubble letters and full-width text are among the most searched aesthetic styles for TikTok usernames and Instagram bios. High visual impact, immediately recognizable. Browse them on the <a href="/bubble-fonts/">bubble letters</a> page.</p>
 
 <span class="art-badge">Editorial</span>
 <h3>Small Caps &amp; Monospace Styles</h3>
-<p>Small caps give an editorial, professional look. Monospace gives a techy, terminal vibe. Both are highly readable and platform-safe — great starting points for any aesthetic bio.</p>
+<p>Small caps give an editorial, professional look. Monospace gives a techy, terminal vibe. Both are highly readable and platform-safe — great starting points for any aesthetic bio. More on the <a href="/small-caps-fonts/">small caps generator</a>.</p>
 
 <span class="art-badge">Subtle</span>
 <h3>Minimal &amp; Academia Fonts</h3>
@@ -115,7 +115,7 @@ export const ARTICLE_HTML = `
 <h3>Tribal &amp; Urban Fonts</h3>
 <p>Angular, symbol-heavy styles referencing tribal patterns and street art aesthetics. Popular in gaming communities and alternative creative profiles.</p>
 <h2>Decorative Borders &amp; Aesthetic Symbols</h2>
-<p>Symbols and borders are what take a styled bio from good to memorable. These are all Unicode-based copy and paste just like regular text.</p>
+<p>Symbols and borders are what take a styled bio from good to memorable. These are all Unicode-based copy and paste just like regular text. For single symbols, see the <a href="/symbols/">aesthetic symbols</a> collection.</p>
 
 <span class="art-badge">Star &amp; Galaxy</span>
 <h3>Star &amp; Galaxy Borders</h3>
@@ -182,7 +182,7 @@ export const ARTICLE_HTML = `
 <div class="example"><span class="ex-text">ʚ♡ɞ your text ʚ♡ɞ</span><button class="cp" data-copybtn>Copy</button></div>
 
 <h2>Make Your Gaming Profile Bio in a Gaming Style</h2>
-<p>Gaming is one of the biggest use cases for aesthetic fonts. A styled username signals skill, identity, and community membership before a single game is played.</p>
+<p>Gaming is one of the biggest use cases for aesthetic fonts. A styled username signals skill, identity, and community membership before a single game is played. Game-by-game rules are on the <a href="/gaming-fonts/">gaming fonts</a> page.</p>
 
 <span class="art-badge">Free Fire</span>
 <h3>Aesthetic Fonts for Free Fire Username</h3>
@@ -199,7 +199,7 @@ export const ARTICLE_HTML = `
 
 <span class="art-badge">Roblox</span>
 <h3>Aesthetic Fonts for Roblox Username</h3>
-<p>Roblox has a wide age range kawaii and cute styles are just as popular as gothic ones. Small caps and serif bold styles work across both casual and competitive Roblox games.</p>
+<p>Roblox usernames only allow letters, numbers and a single underscore, and display names are filtered, so most fancy styles are rejected there. Use styled text on your other profiles instead — the <a href="/gaming-fonts/">gaming fonts</a> page lists which games accept it.</p>
 
 <span class="art-badge">Clan Tags</span>
 <h3>Clan Tag Formats Using Bracket &amp; Box Styles</h3>
@@ -217,16 +217,16 @@ export const ARTICLE_HTML = `
 <p>Every platform has its own character limits and visual culture. Here’s what actually works, platform by platform.</p>
 
 <h2>Aesthetic Fonts for Instagram Bio</h2>
-<p>150 characters, maximum impact. Best styles: cursive script for names, small caps for descriptors, symbol dividers between lines. Avoid heavy Zalgo it breaks mobile bio layout.</p>
+<p>150 characters, maximum impact. Best styles: cursive script for names, small caps for descriptors, symbol dividers between lines. Avoid heavy Zalgo it breaks mobile bio layout. Field limits and examples: <a href="/instagram-fonts/">Instagram fonts</a>.</p>
 
 <h2>Aesthetic Fonts for TikTok Username &amp; Bio</h2>
-<p>Nickname is the primary canvas that appears on every video. Bold, script, and crown bracket styles perform best. Keep bio text short 80 character limit goes fast with Unicode.</p>
+<p>Nickname is the primary canvas that appears on every video. Bold, script, and crown bracket styles perform best. Keep bio text short 80 character limit goes fast with Unicode. See <a href="/tiktok-fonts/">TikTok fonts</a> for what each field accepts.</p>
 
 <h2>Aesthetic Fonts for Discord Server, Nickname &amp; Channels</h2>
-<p>Discord is the most Unicode-friendly platform. Best uses:<br>Nicknames: Small caps or script<br>Server names: Short bold styles<br>Channel names: Different styles per category for visual hierarchy<br>Welcome messages: Box Drawing frames</p>
+<p>Discord accepts Unicode in display names, nicknames, server and channel names. Best uses:<br>Nicknames: Small caps or script<br>Server names: Short bold styles<br>Channel names: Different styles per category for visual hierarchy<br>Welcome messages: Box Drawing frames<br>Note: your unique Discord username only accepts plain characters. See <a href="/discord-fonts/">Discord fonts</a> for markdown tips and limits.</p>
 
 <h2>Aesthetic Fonts for WhatsApp Status &amp; Group Names</h2>
-<p>Unicode text works in WhatsApp status, About section, profile name, and group names. Script cursive in status messages creates genuine warmth. Status character limit: 139 characters.</p>
+<p>Unicode text works in WhatsApp status, About section, profile name, and group names. Script cursive in status messages creates genuine warmth. Status character limit: 139 characters. WhatsApp’s own formatting codes are covered on <a href="/whatsapp-fonts/">WhatsApp fonts</a>.</p>
 
 <h2>Aesthetic Fonts for Twitter / X Display Name &amp; Tweets</h2>
 <p>Display name accepts any Unicode this is your main canvas. In tweets, one styled line within plain text acts as a natural attention anchor that stops scrolling.</p>
@@ -259,7 +259,7 @@ export const ARTICLE_HTML = `
 </ul>
 
 <h3>How to Write in Cursive Letters Online</h3>
-<p>Use a Unicode text converter type your text, select the cursive/script style, copy, and paste directly into any platform. No special software needed. Works on Chrome, Safari, and all major browsers.</p>
+<p>Use a Unicode text converter type your text, select the cursive/script style, copy, and paste directly into any platform. No special software needed. Works on Chrome, Safari, and all major browsers. Use the <a href="/cursive-fonts/">cursive font generator</a> for script styles only.</p>
 
 <h3>How to Change WhatsApp Font Style</h3>
 <p>WhatsApp has built-in formatting (bold, italic, strikethrough via markdown). For more styles, use an aesthetic font generator and paste the Unicode text directly into your message, status, or About section.</p>
@@ -268,7 +268,7 @@ export const ARTICLE_HTML = `
 <p>Type your text in the font generator → copy the styled version → paste into your Twitter display name or bio field. For tweets, paste directly into the compose box. Unicode renders immediately.</p>
 
 <h3>How to Style Your Facebook Name &amp; Posts</h3>
-<p>Go to Facebook Settings → Personal Information → Name. Paste your Unicode-styled name. For posts and comments, paste styled text directly into the compose field it works instantly.</p>
+<p>Facebook’s name standards don’t allow symbols or unusual characters, so a styled profile name is usually rejected. Use styled text in posts, comments and your intro instead — paste it straight into the compose field. More tips on the <a href="/facebook-fonts/">Facebook fonts</a> page.</p>
 
 <h2>Online Font Convert: Types of Text Fonts to Try</h2>
 <p>From bold script to glitch text, here’s every major font type you can convert and copy instantly from this tool.</p>
@@ -381,6 +381,7 @@ export const ARTICLE_HTML = `
 <li>Est. 2003 → small caps + circled year digits</li>
 <li>#1 Creator → bold number + cursive descriptor</li>
 </ul>
+<div lang="id">
 <h2>Tulisan Aesthetic Font Estetik &amp; Ketikan Aesthetic</h2>
 <p>Semua font di generator ini bisa langsung di-copy-paste cocok untuk bio Instagram, nickname TikTok, dan username game favoritmu.</p>
 
@@ -408,6 +409,8 @@ export const ARTICLE_HTML = `
 <h3>Ketikan Aesthetic Copy Paste Langsung Pakai</h3>
 <p>Semua font di generator ini siap pakai tinggal copy paste. Cocok untuk nama aesthetic, bio Instagram, nickname TikTok, username Free Fire, dan status WhatsApp. Tidak ada biaya, tidak perlu daftar.</p>
 
+</div>
+<div lang="fr">
 <h2>Ecriture Aesthetic Guide des Polices Esthetiques</h2>
 <p>Tous les styles de polices esthétiques sont disponibles gratuitement: copiez et collez directement dans votre bio Instagram ou pseudo TikTok.</p>
 
@@ -431,6 +434,7 @@ export const ARTICLE_HTML = `
 <li>Vaporwave: texte large au style retro annees 80</li>
 </ul>
 
+</div>
 <h2>Guide to Choosing the Right Aesthetic Font</h2>
 <p>With 250+ styles available, choosing the right one comes down to three things: your vibe, your platform, and your audience.</p>
 
@@ -463,10 +467,10 @@ export const ARTICLE_HTML = `
 <p>Unicode is the global standard for text encoding every character in every language, plus thousands of special symbols, all assigned unique code points. Version 15.1 contains over 149,000 characters. Your device’s system font covers most of them already.</p>
 
 <h3>Why Styled Text Travels Across Apps Without Breaking</h3>
-<p>When you copy aesthetic text, you copy Unicode code points not font files. The bold letter “A” is a different Unicode character from the regular “A”. Its visual weight is baked into the character itself, so it displays identically everywhere that supports Unicode, which is virtually every modern platform.</p>
+<p>When you copy aesthetic text, you copy Unicode code points not font files. The bold letter “A” is a different Unicode character from the regular “A”. Its visual weight is baked into the character itself, so it keeps its styling anywhere that supports Unicode — nearly every modern platform — although each device draws the characters with its own font.</p>
 
 <h3>When Aesthetic Fonts Don’t Render Correctly And How to Fix It</h3>
-<p>If you see boxes or question marks instead of styled text:</p>
+<p>If you see boxes or question marks instead of styled text: Full explanation: <a href="/guides/why-fonts-show-as-boxes/">why fonts show as boxes</a>.</p>
 <ul>
 <li>The device is running outdated software</li>
 <li>The platform restricts certain Unicode ranges</li>
@@ -501,7 +505,7 @@ export const ARTICLE_HTML = `
 <p class="caption">Fullwidth Unicode variants across all 26 letters</p>
 
 <h2>Aesthetic Bio Templates Ready to Copy and Paste</h2>
-<p>Skip the guesswork - these ready-made bio templates combine the best font styles and symbols so that you can paste and publish instantly.</p>
+<p>Skip the guesswork - these ready-made bio templates combine the best font styles and symbols so that you can paste and publish instantly. More layouts and rules in our <a href="/guides/aesthetic-bio-ideas/">aesthetic bio ideas</a> guide.</p>
 
 <span class="art-badge">Soft &amp; Dreamy</span>
 <h3>Soft &amp; Dreamy Bio Template</h3>

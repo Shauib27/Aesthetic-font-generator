@@ -29,7 +29,7 @@ export function CopyProvider({ children }) {
       try { document.execCommand('copy'); } catch (err) { /* noop */ }
       document.body.removeChild(ta);
     }
-    show(msg || 'Copied! ✅ Paste it anywhere');
+    show(msg || 'Copied to clipboard');
   }, [show]);
 
   return (
