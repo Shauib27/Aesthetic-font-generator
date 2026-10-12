@@ -12,6 +12,7 @@ import { About, Contact, Privacy, Terms } from './pages/StaticPages.jsx';
 import NotFound from './pages/NotFound.jsx';
 import AdminSettings from './pages/AdminSettings.jsx';
 import ConsentBanner from './components/ConsentBanner.jsx';
+import ResponsiveTables from './components/ResponsiveTables.jsx';
 import { LANDINGS } from './content/landings.jsx';
 import { GUIDES } from './content/guides.jsx';
 
@@ -21,6 +22,7 @@ export default function App() {
   return (
     <CopyProvider>
       <ScrollToTop />
+      <ResponsiveTables />
       <a className="skip-link" href="#main">Skip to content</a>
       <Header />
       <main id="main" className="wrap">

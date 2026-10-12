@@ -46,5 +46,10 @@ const sitemap =
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), sitemap);
 fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 
+// Permanent (301) redirects from slashless URLs to the canonical trailing-slash URLs.
+// Without these, hosts use their own default (Cloudflare: a temporary 307).
+const redirects = ROUTES.filter((r) => r.path !== '/').map((r) => `${r.path.slice(0, -1)} ${r.path} 301`);
+fs.writeFileSync(path.join(dist, '_redirects'), redirects.join('\n') + '\n');
+
 fs.rmSync(ssrDir, { recursive: true, force: true });
 console.log(`Prerendered ${ROUTES.length} routes + 404.html for ${SITE_URL}`);
