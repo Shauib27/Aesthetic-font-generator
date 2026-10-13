@@ -8,7 +8,8 @@ import { useCopy } from '../copy.jsx';
 import { IconCopy, IconCheck, IconStar, IconX, IconSearch, IconSpark } from './Icons.jsx';
 
 const MAX_LEN = 300;
-const INITIAL_CARDS = 40;
+// Results are shown in pages so the content below the tool is easy to reach.
+const PAGE_SIZE = 24;
 const EXAMPLES = ['Aesthetic Vibes', 'Luna', 'soft girl era', 'Shadow Hunter', 'Good Vibes Only', 'Daydreamer', 'Midnight Muse', 'GG EZ'];
 
 function load(key, fb) {
@@ -84,7 +85,6 @@ export default function FontGenerator({ recommended, sample = 'Aesthetic Font', 
   const [recents, setRecents] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [copiedId, setCopiedId] = useState(-1);
-  const [full, setFull] = useState(false);
   const exampleIdx = useRef(0);
   const copiedTimer = useRef(null);
   const inputRef = useRef(null);
@@ -94,9 +94,6 @@ export default function FontGenerator({ recommended, sample = 'Aesthetic Font', 
     setFavs(load('ag_favs', []));
     setRecents(load('ag_recent', []));
     setLoaded(true);
-    // The prerendered HTML contains the first INITIAL_CARDS styles; render the rest once hydrated.
-    const t = setTimeout(() => setFull(true), 0);
-    return () => clearTimeout(t);
   }, []);
   useEffect(() => { if (loaded) save('ag_favs', favs); }, [favs, loaded]);
   useEffect(() => { if (loaded) save('ag_recent', recents); }, [recents, loaded]);
@@ -136,7 +133,17 @@ export default function FontGenerator({ recommended, sample = 'Aesthetic Font', 
     return () => clearTimeout(t);
   }, [query]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const shown = useMemo(() => (full ? list : list.slice(0, INITIAL_CARDS)), [full, list]);
+  // How many cards are visible. Resets to one page whenever the tab or search changes.
+  const viewKey = cat + '|' + deferredQuery.trim();
+  const [paging, setPaging] = useState({ key: viewKey, limit: PAGE_SIZE });
+  const limit = paging.key === viewKey ? paging.limit : PAGE_SIZE;
+  const remaining = Math.max(0, list.length - limit);
+  const showMore = (all) => {
+    const next = all ? list.length : limit + PAGE_SIZE;
+    setPaging({ key: viewKey, limit: next });
+    track('font_show_more', { results_count: Math.min(next, list.length) });
+  };
+  const shown = useMemo(() => list.slice(0, limit), [list, limit]);
   const outs = useMemo(() => shown.map((i) => styleOut(i, display)), [shown, display]);
 
   const handleCopy = useCallback((i, out) => {
@@ -264,6 +271,7 @@ export default function FontGenerator({ recommended, sample = 'Aesthetic Font', 
 
       <p className="gen-status" role="status">
         {searching ? `${list.length} styles match “${query.trim()}”` : `${list.length} styles`}
+        {remaining > 0 && ` · showing ${shown.length}`}
         <span className="gen-hint"> · Tap a style or its Copy button</span>
       </p>
 
@@ -285,6 +293,18 @@ export default function FontGenerator({ recommended, sample = 'Aesthetic Font', 
           ))
         )}
       </div>
+
+      {remaining > 0 && (
+        <div className="more">
+          <button type="button" className="more-btn" onClick={() => showMore(false)}>
+            Show {Math.min(PAGE_SIZE, remaining)} more fonts
+          </button>
+          <button type="button" className="link-btn" onClick={() => showMore(true)}>
+            Show all {list.length}
+          </button>
+          <p className="more-note">Showing {shown.length} of {list.length} styles</p>
+        </div>
+      )}
     </section>
   );
 }

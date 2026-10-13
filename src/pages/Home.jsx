@@ -66,7 +66,8 @@ export default function Home() {
     <>
       <Seo title={TITLE} description={DESC} path="/" jsonLd={[WEBSITE_LD, WEBAPP_LD, faqLd(HOME_FAQ)]} />
       <div className="hero">
-        <h1>Aesthetic Font Generator — Copy &amp; Paste Aesthetic Fonts</h1>
+        <p className="eyebrow"><span className="dot" aria-hidden="true" />Free · {STYLE_COUNT} styles · No app or sign-up</p>
+        <h1><span className="grad">Aesthetic Font Generator</span> — Copy &amp; Paste Aesthetic Fonts</h1>
         <p className="lead">
           Type your text once and see it in {STYLE_COUNT} aesthetic styles — cursive, cute, gothic, bubble and more.
           Each style is made of Unicode characters, so it pastes into Instagram, TikTok, Discord and chats.
